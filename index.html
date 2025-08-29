@@ -6,7 +6,7 @@
     <title>Springers Vehicle Sourcing | Find Your Dream Car</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -20,7 +20,8 @@
                         }
                     },
                     fontFamily: {
-                        'poppins': ['Poppins', 'sans-serif']
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'work-sans': ['Work Sans', 'sans-serif']
                     }
                 }
             }
@@ -182,18 +183,28 @@
 </head>
 <body class="font-poppins text-luxury-white bg-luxury-black">
     <!-- Header/Navigation -->
-    <header class="bg-luxury-black/90 backdrop-blur-md border-b border-luxury-gold/20 sticky top-0 z-50">
+    <header class="bg-luxury-black/90 backdrop-blur-md border-b border-luxury-gold/20 sticky top-0 z-50 font-work-sans">
         <nav class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                     <img src="logo.png" alt="Springers Vehicle Sourcing" class="h-12 w-auto">
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#how-it-works" class="text-luxury-white hover:text-luxury-gold transition duration-300">How It Works</a>
-                    <a href="calculator.html" class="text-luxury-white hover:text-luxury-gold transition duration-300">Finance Calculator</a>
-                    <a href="#testimonials" class="text-luxury-white hover:text-luxury-gold transition duration-300">Reviews</a>
-                    <a href="#faq" class="text-luxury-white hover:text-luxury-gold transition duration-300">FAQ</a>
-                    <button onclick="openLeadForm()" class="gold-gradient text-luxury-black px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition duration-300">Start My Search</button>
+                    <a href="#how-it-works" class="text-luxury-white hover:text-luxury-gold transition duration-300">
+                        <i class="fas fa-cogs mr-2"></i>How It Works
+                    </a>
+                    <a href="calculator.html" class="text-luxury-white hover:text-luxury-gold transition duration-300">
+                        <i class="fas fa-calculator mr-2"></i>Finance Calculator
+                    </a>
+                    <a href="#testimonials" class="text-luxury-white hover:text-luxury-gold transition duration-300">
+                        <i class="fas fa-star mr-2"></i>Reviews
+                    </a>
+                    <a href="#faq" class="text-luxury-white hover:text-luxury-gold transition duration-300">
+                        <i class="fas fa-question-circle mr-2"></i>FAQ
+                    </a>
+                    <button onclick="openLeadForm()" class="gold-gradient text-luxury-black px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition duration-300">
+                        <i class="fas fa-search mr-2"></i>Start My Search
+                    </button>
                 </div>
                 <div class="md:hidden">
                     <button id="mobile-menu-btn" class="hamburger">
@@ -210,7 +221,7 @@
     <div id="mobile-overlay" class="mobile-overlay"></div>
     
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu">
+    <div id="mobile-menu" class="mobile-menu font-work-sans">
         <div class="p-6">
             <div class="flex items-center justify-between mb-8">
                 <img src="logo.png" alt="Springers Vehicle Sourcing" class="h-8 w-auto">
@@ -345,26 +356,26 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <div class="car-card p-6 rounded-xl">
                     <div class="h-48 rounded-lg mb-4 overflow-hidden">
-                        <img src="porsche.png" alt="2021 Porsche Cayman" class="w-full h-full object-cover">
+                        <img src="toyotacamry.jpg" alt="2022 Toyota Camry" class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-luxury-white">2021 Porsche Cayman</h3>
-                    <p class="text-luxury-gold font-semibold mb-2">Saved $3,200</p>
+                    <h3 class="text-xl font-bold mb-2 text-luxury-white">2022 Toyota Camry</h3>
+                    <p class="text-luxury-gold font-semibold mb-2">Saved $2,400</p>
                     <p class="text-luxury-white/80">Shipped to Wisconsin in 5 days</p>
                 </div>
                 <div class="car-card p-6 rounded-xl">
                     <div class="h-48 rounded-lg mb-4 overflow-hidden">
-                        <img src="bmw.jpg" alt="2022 BMW M3" class="w-full h-full object-cover">
+                        <img src="hondaaccord.jpeg" alt="2021 Honda Accord" class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-luxury-white">2022 BMW M3</h3>
-                    <p class="text-luxury-gold font-semibold mb-2">Saved $5,800</p>
+                    <h3 class="text-xl font-bold mb-2 text-luxury-white">2021 Honda Accord</h3>
+                    <p class="text-luxury-gold font-semibold mb-2">Saved $3,200</p>
                     <p class="text-luxury-white/80">Delivered to Texas in 3 days</p>
                 </div>
                 <div class="car-card p-6 rounded-xl">
                     <div class="h-48 rounded-lg mb-4 overflow-hidden">
-                        <img src="tesla.jpg" alt="2020 Tesla Model S" class="w-full h-full object-cover">
+                        <img src="nissanaltima.jpg" alt="2020 Nissan Altima" class="w-full h-full object-cover">
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-luxury-white">2020 Tesla Model S</h3>
-                    <p class="text-luxury-gold font-semibold mb-2">Saved $4,500</p>
+                    <h3 class="text-xl font-bold mb-2 text-luxury-white">2020 Nissan Altima</h3>
+                    <p class="text-luxury-gold font-semibold mb-2">Saved $2,800</p>
                     <p class="text-luxury-white/80">Shipped to Florida in 4 days</p>
                 </div>
             </div>
@@ -378,7 +389,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <div class="testimonial-card p-8 rounded-xl">
                     <div class="text-luxury-gold text-2xl mb-4">★★★★★</div>
-                    <p class="text-luxury-white/90 mb-6 italic">"Found my dream BMW M4 for $6,000 less than any dealer. Process was seamless and delivery was perfect."</p>
+                    <p class="text-luxury-white/90 mb-6 italic">"Found my perfect Toyota Camry for $2,400 less than any dealer. Process was seamless and delivery was perfect."</p>
                     <div class="border-t border-luxury-gold/20 pt-4">
                         <p class="font-bold text-luxury-white">M.R.</p>
                         <p class="text-sm text-luxury-gold">California</p>
@@ -386,7 +397,7 @@
                 </div>
                 <div class="testimonial-card p-8 rounded-xl">
                     <div class="text-luxury-gold text-2xl mb-4">★★★★★</div>
-                    <p class="text-luxury-white/90 mb-6 italic">"Incredible service! They sourced a rare Porsche 911 that I couldn't find anywhere else. Saved me months of searching."</p>
+                    <p class="text-luxury-white/90 mb-6 italic">"Incredible service! They sourced a reliable Honda Accord that I couldn't find anywhere else. Saved me months of searching."</p>
                     <div class="border-t border-luxury-gold/20 pt-4">
                         <p class="font-bold text-luxury-white">J.K.</p>
                         <p class="text-sm text-luxury-gold">New York</p>
@@ -394,7 +405,7 @@
                 </div>
                 <div class="testimonial-card p-8 rounded-xl">
                     <div class="text-luxury-gold text-2xl mb-4">★★★★★</div>
-                    <p class="text-luxury-white/90 mb-6 italic">"Professional team, transparent pricing, and delivered exactly what they promised. Will definitely use again."</p>
+                    <p class="text-luxury-white/90 mb-6 italic">"Professional team, transparent pricing, and delivered exactly what they promised. Will definitely use again for my next car."</p>
                     <div class="border-t border-luxury-gold/20 pt-4">
                         <p class="font-bold text-luxury-white">S.L.</p>
                         <p class="text-sm text-luxury-gold">Texas</p>
