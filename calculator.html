@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Loan Calculator | Springers Vehicle Sourcing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            black: '#0B0B0B',
+                            gold: '#D4AF37',
+                            white: '#F5F5F5',
+                            gray: '#1A1A1A'
+                        }
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-bg {
+            background: linear-gradient(rgba(11, 11, 11, 0.8), rgba(11, 11, 11, 0.6)), 
+                        url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"%3E%3Crect fill="%23000" width="1200" height="800"/%3E%3Cpath fill="%23111" d="M0,600 Q200,500 400,550 T800,520 T1200,580 L1200,800 L0,800 Z"/%3E%3Ccircle fill="%23D4AF37" opacity="0.1" cx="900" cy="200" r="150"/%3E%3Ccircle fill="%23D4AF37" opacity="0.05" cx="300" cy="400" r="100"/%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .gold-gradient {
+            background: linear-gradient(45deg, #D4AF37, #F4E799);
+        }
+        .calculator-input {
+            background: rgba(11, 11, 11, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            color: #F5F5F5;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+        .calculator-input:focus {
+            border-color: #D4AF37;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+        .result-card {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(11, 11, 11, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+    </style>
+</head>
+<body class="font-poppins text-luxury-white bg-luxury-black">
+    <!-- Header/Navigation -->
+    <header class="bg-luxury-black/90 backdrop-blur-md border-b border-luxury-gold/20 sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <img src="logo.png" alt="Springers Vehicle Sourcing" class="h-12 w-auto">
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-luxury-white hover:text-luxury-gold transition duration-300">Home</a>
+                    <a href="index.html#how-it-works" class="text-luxury-white hover:text-luxury-gold transition duration-300">How It Works</a>
+                    <a href="calculator.html" class="text-luxury-gold font-semibold">Finance Calculator</a>
+                    <a href="index.html#testimonials" class="text-luxury-white hover:text-luxury-gold transition duration-300">Reviews</a>
+                    <a href="index.html#faq" class="text-luxury-white hover:text-luxury-gold transition duration-300">FAQ</a>
+                    <a href="index.html#contact" class="gold-gradient text-luxury-black px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition duration-300">Start My Search</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-overlay" class="mobile-overlay"></div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu">
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-8">
+                <img src="logo.png" alt="Springers Vehicle Sourcing" class="h-8 w-auto">
+                <button id="mobile-close-btn" class="text-luxury-white hover:text-luxury-gold">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <nav class="space-y-4">
+                <a href="index.html" class="block py-3 px-4 text-luxury-white hover:text-luxury-gold hover:bg-luxury-gold/10 rounded-lg transition duration-300">
+                    <i class="fas fa-home mr-3"></i>Home
+                </a>
+                <a href="index.html#how-it-works" class="block py-3 px-4 text-luxury-white hover:text-luxury-gold hover:bg-luxury-gold/10 rounded-lg transition duration-300">
+                    <i class="fas fa-cogs mr-3"></i>How It Works
+                </a>
+                <a href="calculator.html" class="block py-3 px-4 text-luxury-gold bg-luxury-gold/10 rounded-lg font-semibold">
+                    <i class="fas fa-calculator mr-3"></i>Finance Calculator
+                </a>
+                <a href="index.html#testimonials" class="block py-3 px-4 text-luxury-white hover:text-luxury-gold hover:bg-luxury-gold/10 rounded-lg transition duration-300">
+                    <i class="fas fa-star mr-3"></i>Reviews
+                </a>
+                <a href="index.html#faq" class="block py-3 px-4 text-luxury-white hover:text-luxury-gold hover:bg-luxury-gold/10 rounded-lg transition duration-300">
+                    <i class="fas fa-question-circle mr-3"></i>FAQ
+                </a>
+                <div class="pt-4 border-t border-luxury-gold/20">
+                    <a href="index.html#contact" class="block w-full gold-gradient text-luxury-black px-6 py-4 rounded-lg font-bold hover:opacity-90 transition duration-300 text-center">
+                        <i class="fas fa-search mr-2"></i>Start My Search
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 text-luxury-white leading-tight">
+                Auto Loan <span class="text-luxury-gold">Calculator</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-luxury-white/90 font-light">
+                Calculate your monthly payment and see how much you can afford for your dream vehicle.
+            </p>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="py-20 bg-luxury-gray">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Calculator Form -->
+                    <div class="bg-luxury-black/50 p-8 rounded-2xl border border-luxury-gold/20">
+                        <h2 class="text-3xl font-bold mb-8 text-luxury-white">Calculate Your Payment</h2>
+                        <form id="calculator-form" class="space-y-6">
+                            <div>
+                                <label class="block text-luxury-white font-semibold mb-2">Vehicle Price</label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-luxury-gold font-bold">$</span>
+                                    <input type="number" id="vehiclePrice" placeholder="50000" class="calculator-input pl-8" min="0" step="1000">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-luxury-white font-semibold mb-2">Down Payment</label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-luxury-gold font-bold">$</span>
+                                    <input type="number" id="downPayment" placeholder="10000" class="calculator-input pl-8" min="0" step="500">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-luxury-white font-semibold mb-2">Interest Rate (APR)</label>
+                                <div class="relative">
+                                    <input type="number" id="interestRate" placeholder="6.5" class="calculator-input pr-8" min="0" max="30" step="0.1">
+                                    <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-luxury-gold font-bold">%</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-luxury-white font-semibold mb-2">Loan Term</label>
+                                <select id="loanTerm" class="calculator-input">
+                                    <option value="">Select loan term</option>
+                                    <option value="36">36 months (3 years)</option>
+                                    <option value="48">48 months (4 years)</option>
+                                    <option value="60">60 months (5 years)</option>
+                                    <option value="72">72 months (6 years)</option>
+                                    <option value="84">84 months (7 years)</option>
+                                </select>
+                            </div>
+                            <button type="button" onclick="calculateLoan()" class="w-full gold-gradient text-luxury-black py-4 rounded-lg text-xl font-bold hover:opacity-90 transition duration-300">
+                                <i class="fas fa-calculator mr-2"></i>
+                                Calculate Payment
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Results Panel -->
+                    <div class="space-y-6">
+                        <div id="results" class="hidden">
+                            <div class="result-card p-8 rounded-2xl">
+                                <h3 class="text-2xl font-bold mb-6 text-luxury-white">Payment Breakdown</h3>
+                                
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center py-3 border-b border-luxury-gold/20">
+                                        <span class="text-luxury-white/80">Monthly Payment</span>
+                                        <span id="monthlyPayment" class="text-3xl font-bold text-luxury-gold">$0</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-3 border-b border-luxury-gold/20">
+                                        <span class="text-luxury-white/80">Total Loan Amount</span>
+                                        <span id="loanAmount" class="text-xl font-semibold text-luxury-white">$0</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-3 border-b border-luxury-gold/20">
+                                        <span class="text-luxury-white/80">Total Interest</span>
+                                        <span id="totalInterest" class="text-xl font-semibold text-luxury-white">$0</span>
+                                    </div>
+                                    <div class="flex justify-between items-center py-3">
+                                        <span class="text-luxury-white/80">Total Cost</span>
+                                        <span id="totalCost" class="text-xl font-semibold text-luxury-white">$0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tips -->
+                        <div class="bg-luxury-black/30 p-6 rounded-xl border border-luxury-gold/20">
+                            <h4 class="text-xl font-bold mb-4 text-luxury-gold">
+                                <i class="fas fa-lightbulb mr-2"></i>
+                                Financing Tips
+                            </h4>
+                            <ul class="space-y-3 text-luxury-white/80">
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-check text-luxury-gold mt-1"></i>
+                                    <span>A larger down payment reduces monthly payments</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-check text-luxury-gold mt-1"></i>
+                                    <span>Shorter loan terms mean higher payments but less interest</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-check text-luxury-gold mt-1"></i>
+                                    <span>Shop around for the best interest rates</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-check text-luxury-gold mt-1"></i>
+                                    <span>Consider pre-approval before shopping</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-luxury-black">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-luxury-white">Ready to Find Your Dream Car?</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto text-luxury-white/90">
+                Now that you know your budget, let us help you find the perfect vehicle at the best price.
+            </p>
+            <a href="index.html#contact" class="gold-gradient text-luxury-black px-12 py-6 rounded-lg text-2xl font-black hover:opacity-90 transition duration-300 inline-flex items-center space-x-3">
+                <span>🚗 Start Vehicle Search</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-luxury-gray border-t border-luxury-gold/20 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="logo.png" alt="Springers Vehicle Sourcing" class="h-10 w-auto">
+                    </div>
+                    <p class="text-luxury-white/80 leading-relaxed">Your trusted partner in finding and delivering dream vehicles nationwide.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-luxury-white">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-luxury-white/80 hover:text-luxury-gold transition duration-300">Home</a></li>
+                        <li><a href="index.html#how-it-works" class="text-luxury-white/80 hover:text-luxury-gold transition duration-300">How It Works</a></li>
+                        <li><a href="index.html#testimonials" class="text-luxury-white/80 hover:text-luxury-gold transition duration-300">Reviews</a></li>
+                        <li><a href="index.html#faq" class="text-luxury-white/80 hover:text-luxury-gold transition duration-300">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-luxury-white">Contact Info</h4>
+                    <p class="text-luxury-white/80 mb-4">Ready to find your dream car? Get in touch with our team today.</p>
+                    <a href="index.html#contact" class="gold-gradient text-luxury-black px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition duration-300">Start My Search</a>
+                </div>
+            </div>
+            <div class="border-t border-luxury-gold/20 mt-8 pt-8 text-center">
+                <p class="text-luxury-white/80">&copy; 2025 Springers Vehicle Sourcing. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileCloseBtn = document.getElementById('mobile-close-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('open');
+            mobileOverlay.classList.add('show');
+            mobileMenuBtn.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('open');
+            mobileOverlay.classList.remove('show');
+            mobileMenuBtn.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', openMobileMenu);
+        }
+        
+        if (mobileCloseBtn) {
+            mobileCloseBtn.addEventListener('click', closeMobileMenu);
+        }
+        
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', closeMobileMenu);
+        }
+
+        // Close mobile menu when clicking on menu links
+        const mobileLinks = mobileMenu?.querySelectorAll('a');
+        if (mobileLinks) {
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+        }
+
+        // Close mobile menu on window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                closeMobileMenu();
+            }
+        });
+
+        // Auto Loan Calculator
+        function calculateLoan() {
+            const vehiclePrice = parseFloat(document.getElementById('vehiclePrice').value) || 0;
+            const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
+            const interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const loanTerm = parseInt(document.getElementById('loanTerm').value) || 0;
+
+            // Validation
+            if (vehiclePrice <= 0) {
+                alert('Please enter a valid vehicle price');
+                return;
+            }
+            if (downPayment >= vehiclePrice) {
+                alert('Down payment cannot be greater than or equal to vehicle price');
+                return;
+            }
+            if (loanTerm <= 0) {
+                alert('Please select a loan term');
+                return;
+            }
+
+            const loanAmount = vehiclePrice - downPayment;
+            const monthlyRate = (interestRate / 100) / 12;
+            
+            let monthlyPayment;
+            let totalInterest;
+            
+            if (monthlyRate === 0) {
+                monthlyPayment = loanAmount / loanTerm;
+                totalInterest = 0;
+            } else {
+                monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, loanTerm)) / (Math.pow(1 + monthlyRate, loanTerm) - 1);
+                totalInterest = (monthlyPayment * loanTerm) - loanAmount;
+            }
+
+            const totalCost = vehiclePrice + totalInterest;
+
+            // Display results
+            document.getElementById('monthlyPayment').textContent = '$' + monthlyPayment.toFixed(2);
+            document.getElementById('loanAmount').textContent = '$' + loanAmount.toLocaleString();
+            document.getElementById('totalInterest').textContent = '$' + totalInterest.toFixed(2);
+            document.getElementById('totalCost').textContent = '$' + totalCost.toLocaleString();
+
+            // Show results panel
+            document.getElementById('results').classList.remove('hidden');
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+        }
+
+        // Auto-calculate when inputs change
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = ['vehiclePrice', 'downPayment', 'interestRate', 'loanTerm'];
+            inputs.forEach(id => {
+                const element = document.getElementById(id);
+                element.addEventListener('input', function() {
+                    // Only auto-calculate if all fields have values
+                    if (inputs.every(inputId => document.getElementById(inputId).value)) {
+                        calculateLoan();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
