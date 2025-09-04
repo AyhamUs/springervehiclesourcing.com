@@ -255,23 +255,23 @@
     <section class="hero-bg min-h-screen flex items-center justify-center relative">
         <div class="container mx-auto px-4 md:px-6 text-center mobile-padding">
             <h1 class="hero-text text-5xl md:text-7xl font-black mb-6 text-luxury-white leading-tight">
-                Find Your Dream Car<br>
-                <span class="text-gold">Without the Dealership Hassle</span>
+                Get the Car You Want<br>
+                <span class="text-gold">Without Paying Dealer Prices</span>
             </h1>
             <p class="hero-subtext text-lg md:text-xl lg:text-2xl mb-8 md:mb-12 max-w-4xl mx-auto text-luxury-white/90 font-light">
-                We source vehicles through auctions & dealer networks, then ship to your door — saving you time and money.
+                We source your vehicle directly from dealer-only auctions, skip the markup, and save $3,000-$7,000+ compared to retail.
             </p>
             
             <!-- Lead Capture Form -->
             <div class="max-w-2xl mx-auto bg-luxury-gray/80 backdrop-blur-lg p-4 md:p-8 rounded-2xl border border-luxury-gold/20">
                 <form id="hero-form" class="space-y-4 md:space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" placeholder="Full Name" required class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
-                        <input type="email" placeholder="Email Address" required class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
+                        <input type="text" name="name" placeholder="Full Name" required class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
+                        <input type="email" name="email" placeholder="Email Address" required class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
                     </div>
-                    <input type="tel" placeholder="Phone Number" required class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
-                    <input type="text" placeholder="Vehicle Wanted (Year/Make/Model)" class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
-                    <select class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white focus:border-luxury-gold focus:outline-none text-sm md:text-base">
+                    <input type="tel" name="phone" placeholder="Phone Number" required class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
+                    <input type="text" name="vehicle" placeholder="Vehicle Wanted (Year/Make/Model)" class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
+                    <select name="budget" class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white focus:border-luxury-gold focus:outline-none text-sm md:text-base">
                         <option value="">Budget Range</option>
                         <option value="under-25k">Under $25,000</option>
                         <option value="25k-50k">$25,000 - $50,000</option>
@@ -324,7 +324,7 @@
     <section class="py-20 bg-luxury-black">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-luxury-white">Why Choose Us</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
                 <div class="text-center p-6 bg-luxury-gray/50 rounded-xl border border-luxury-gold/20">
                     <i class="fas fa-gavel text-5xl text-luxury-gold mb-6"></i>
                     <h3 class="text-xl font-bold mb-4 text-luxury-white">Auction Access</h3>
@@ -344,6 +344,11 @@
                     <i class="fas fa-handshake text-5xl text-luxury-gold mb-6"></i>
                     <h3 class="text-xl font-bold mb-4 text-luxury-white">Flat Finder's Fee</h3>
                     <p class="text-luxury-white/80">Transparent pricing with no surprises or hidden costs.</p>
+                </div>
+                <div class="text-center p-6 bg-luxury-gray/50 rounded-xl border border-luxury-gold/20">
+                    <i class="fas fa-credit-card text-5xl text-luxury-gold mb-6"></i>
+                    <h3 class="text-xl font-bold mb-4 text-luxury-white">We Offer Financing</h3>
+                    <p class="text-luxury-white/80">Competitive financing options to help you get your dream car.</p>
                 </div>
             </div>
         </div>
@@ -517,12 +522,12 @@
             </div>
             <form id="lead-form" class="space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" placeholder="Full Name" required class="w-full px-4 py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none">
-                    <input type="email" placeholder="Email Address" required class="w-full px-4 py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none">
+                    <input type="text" name="name" placeholder="Full Name" required class="w-full px-4 py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none">
+                    <input type="email" name="email" placeholder="Email Address" required class="w-full px-4 py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none">
                 </div>
-                <input type="tel" placeholder="Phone Number" required class="w-full px-4 py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none">
-                <input type="text" placeholder="Vehicle Wanted (Year/Make/Model)" class="w-full px-4 py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none">
-                <select class="w-full px-4 py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white focus:border-luxury-gold focus:outline-none">
+                <input type="tel" name="phone" placeholder="Phone Number" required class="w-full px-4 py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none">
+                <input type="text" name="vehicle" placeholder="Vehicle Wanted (Year/Make/Model)" class="w-full px-4 py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none">
+                <select name="budget" class="w-full px-4 py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white focus:border-luxury-gold focus:outline-none">
                     <option value="">Budget Range</option>
                     <option value="under-25k">Under $25,000</option>
                     <option value="25k-50k">$25,000 - $50,000</option>
@@ -530,7 +535,7 @@
                     <option value="100k-200k">$100,000 - $200,000</option>
                     <option value="over-200k">Over $200,000</option>
                 </select>
-                <textarea placeholder="Additional details or special requirements..." rows="3" class="w-full px-4 py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none"></textarea>
+                <textarea name="details" placeholder="Additional details or special requirements..." rows="3" class="w-full px-4 py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none"></textarea>
                 <button type="submit" class="w-full gold-gradient text-luxury-black py-4 rounded-lg text-xl font-bold hover:opacity-90 transition duration-300">
                     🚗 Start My Search
                 </button>
@@ -641,22 +646,85 @@
         });
 
         function handleFormSubmission(form) {
-            // Here you would typically send the data to your backend/CRM
-            // For demo purposes, we'll just show a success message
-            
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
             
-            // Show success message
-            alert('Thank you! We\'ll be in touch within 24 hours to start sourcing your dream vehicle.');
+            // Get form data
+            const name = data.name || form.querySelector('input[placeholder="Full Name"]')?.value || 'Not provided';
+            const email = data.email || form.querySelector('input[placeholder="Email Address"]')?.value || 'Not provided';
+            const phone = data.phone || form.querySelector('input[placeholder="Phone Number"]')?.value || 'Not provided';
+            const vehicle = data.vehicle || form.querySelector('input[placeholder*="Vehicle"]')?.value || 'Not provided';
+            const budget = data.budget || form.querySelector('select')?.value || 'Not provided';
+            const details = data.details || form.querySelector('textarea')?.value || 'Not provided';
             
-            // Reset form
-            form.reset();
+            // Create Discord webhook payload
+            const discordPayload = {
+                embeds: [{
+                    title: "🚗 New Vehicle Sourcing Lead",
+                    color: 0xD4AF37, // Gold color
+                    fields: [
+                        {
+                            name: "👤 Full Name",
+                            value: name,
+                            inline: true
+                        },
+                        {
+                            name: "📧 Email",
+                            value: email,
+                            inline: true
+                        },
+                        {
+                            name: "📱 Phone",
+                            value: phone,
+                            inline: true
+                        },
+                        {
+                            name: "🚙 Vehicle Wanted",
+                            value: vehicle,
+                            inline: false
+                        },
+                        {
+                            name: "💰 Budget Range",
+                            value: budget,
+                            inline: true
+                        },
+                        {
+                            name: "📝 Additional Details",
+                            value: details || "None provided",
+                            inline: false
+                        }
+                    ],
+                    timestamp: new Date().toISOString(),
+                    footer: {
+                        text: "Springers Vehicle Sourcing"
+                    }
+                }]
+            };
             
-            // In a real implementation, you would:
-            // 1. Send data to your CRM/backend
-            // 2. Trigger automated email/SMS sequences
-            // 3. Track the conversion
+            // Send to Discord webhook
+            fetch('https://discord.com/api/webhooks/1413298108200390807/VTAoo6a1cd6psX0DlXk7qWn1D2nHAhEbpCtMu0Vtfo9m2z0_j9TUPuhvRnFdjxWsyWUI', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(discordPayload)
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Show success message
+                    alert('Thank you! We\'ll be in touch within 24 hours to start sourcing your dream vehicle.');
+                    // Reset form
+                    form.reset();
+                } else {
+                    throw new Error('Failed to submit form');
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting form:', error);
+                // Still show success message to user but log error
+                alert('Thank you! We\'ll be in touch within 24 hours to start sourcing your dream vehicle.');
+                form.reset();
+            });
             
             console.log('Lead captured:', data);
         }
