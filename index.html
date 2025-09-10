@@ -663,7 +663,6 @@
                     title: "🚗 New Vehicle Sourcing Lead",
                     color: 0xD4AF37, // Gold color
                     fields: [
-                        // SECTION 1: Contact Information
                         {
                             name: "👤 Name",
                             value: name,
@@ -679,7 +678,6 @@
                             value: phone,
                             inline: true
                         },
-                        // SECTION 2: Vehicle Requirements
                         {
                             name: "🚙 Vehicle Wanted",
                             value: vehicle,
@@ -690,7 +688,6 @@
                             value: budget,
                             inline: true
                         },
-                        // SECTION 3: Additional Details
                         {
                             name: "📝 Additional Details",
                             value: details || "None provided",
@@ -702,14 +699,15 @@
                         text: "Springers Vehicle Sourcing | Lead Source: Website"
                     }
                 }],
-                // Zapier-friendly data structure
-                content: `**NEW LEAD CAPTURED**\n` +
-                        `Name: ${name}\n` +
-                        `Email: ${email}\n` +
-                        `Phone: ${phone}\n` +
-                        `Vehicle: ${vehicle}\n` +
-                        `Budget: ${budget}\n` +
-                        `Details: ${details || "None provided"}`
+                // Individual fields for Zapier to access separately
+                customer_name: name,
+                customer_email: email,
+                customer_phone: phone,
+                vehicle_wanted: vehicle,
+                budget_range: budget,
+                additional_details: details || "None provided",
+                lead_source: "Website Form",
+                date_captured: new Date().toISOString()
             };
             
             // Send to Discord webhook
