@@ -634,20 +634,39 @@
         }
 
         // Form Submissions
-        document.getElementById('hero-form').addEventListener('submit', function(e) {
+        // Replace your current form submission with this
+        document.getElementById('your-form').addEventListener('submit', async function(e) {
             e.preventDefault();
-            handleFormSubmission(this);
-        });
 
-        document.getElementById('lead-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            handleFormSubmission(this);
-            closeLeadForm();
-        });
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phoneNumber: document.getElementById('phone').value,
+                budget: document.getElementById('budget').value,
+                vehicleWanted: document.getElementById('vehicle').value
+            };
 
-        function handleFormSubmission(form) {
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData);
+            try {
+                const response = await fetch('/api/leads/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Thank you! Your information has been submitted successfully.');
+                    // Clear form or redirect
+                } else {
+                    alert('Error: ' + result.error);
+                }
+            } catch (error) {
+                alert('Network error. Please try again.');
+            }
+        });
             
             // Get form data
             const name = data.name || form.querySelector('input[placeholder="Full Name"]')?.value || 'Not provided';
