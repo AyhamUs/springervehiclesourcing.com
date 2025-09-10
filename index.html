@@ -663,8 +663,9 @@
                     title: "🚗 New Vehicle Sourcing Lead",
                     color: 0xD4AF37, // Gold color
                     fields: [
+                        // SECTION 1: Contact Information
                         {
-                            name: "👤 Full Name",
+                            name: "👤 Name",
                             value: name,
                             inline: true
                         },
@@ -674,10 +675,11 @@
                             inline: true
                         },
                         {
-                            name: "📱 Phone",
+                            name: "📱 Phone Number",
                             value: phone,
                             inline: true
                         },
+                        // SECTION 2: Vehicle Requirements
                         {
                             name: "🚙 Vehicle Wanted",
                             value: vehicle,
@@ -688,6 +690,7 @@
                             value: budget,
                             inline: true
                         },
+                        // SECTION 3: Additional Details
                         {
                             name: "📝 Additional Details",
                             value: details || "None provided",
@@ -696,9 +699,17 @@
                     ],
                     timestamp: new Date().toISOString(),
                     footer: {
-                        text: "Springers Vehicle Sourcing"
+                        text: "Springers Vehicle Sourcing | Lead Source: Website"
                     }
-                }]
+                }],
+                // Zapier-friendly data structure
+                content: `**NEW LEAD CAPTURED**\n` +
+                        `Name: ${name}\n` +
+                        `Email: ${email}\n` +
+                        `Phone: ${phone}\n` +
+                        `Vehicle: ${vehicle}\n` +
+                        `Budget: ${budget}\n` +
+                        `Details: ${details || "None provided"}`
             };
             
             // Send to Discord webhook
