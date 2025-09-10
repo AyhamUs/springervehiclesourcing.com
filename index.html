@@ -646,24 +646,27 @@
         });
 
         
+        // put your real Zapier Catch Hook here (or leave "" to disable direct post)
+        const ZAPIER_CATCH_HOOK_URL = "https://hooks.zapier.com/hooks/catch/24508671/udlqd4f/"; // ← replace
+
         function handleFormSubmission(form) {
           const formData = new FormData(form);
           const data = Object.fromEntries(formData);
 
           // Read fields (works for both the hero form and the modal form)
-          const name = (data.name || form.querySelector('input[name="name"]')?.value || 'Not provided').trim();
-          const email = (data.email || form.querySelector('input[name="email"]')?.value || 'Not provided').trim();
-          const phone = (data.phone || form.querySelector('input[name="phone"]')?.value || 'Not provided').trim();
+          const name    = (data.name    || form.querySelector('input[name="name"]')?.value    || 'Not provided').trim();
+          const email   = (data.email   || form.querySelector('input[name="email"]')?.value   || 'Not provided').trim();
+          const phone   = (data.phone   || form.querySelector('input[name="phone"]')?.value   || 'Not provided').trim();
           const vehicle = (data.vehicle || form.querySelector('input[name="vehicle"]')?.value || 'Not provided').trim();
-          const budget = (data.budget || form.querySelector('select[name="budget"]')?.value || 'Not provided').trim();
+          const budget  = (data.budget  || form.querySelector('select[name="budget"]')?.value || 'Not provided').trim();
           const details = (data.details || form.querySelector('textarea[name="details"]')?.value || 'Not provided').trim();
 
           // Helpful metadata for your Zap
           const submittedAt = new Date().toISOString();
-          const pageUrl = window.location.href;
-          const userAgent = navigator.userAgent;
+          const pageUrl     = window.location.href;
+          const userAgent   = navigator.userAgent;
 
-          // A clean JSON object we’ll include in the message content for Zapier to parse
+          // Clean JSON object for Zapier
           const zapPayload = {
             name,
             email,
@@ -676,36 +679,38 @@
             user_agent: userAgent
           };
 
-          // Plain text content for Zapier (easy to parse: key:value lines + JSON block)
+          // Plain text content (NO left padding) to keep Discord parsing simple if needed
           const contentForZapier =
-        `NEW_LEAD
-        name: ${name}
-        email: ${email}
-        phone: ${phone}
-        vehicle: ${vehicle}
-        budget: ${budget}
-        details: ${details || 'Not provided'}
-        submitted_at: ${submittedAt}
-        page_url: ${pageUrl}
-
-        \`\`\`json
-        ${JSON.stringify(zapPayload)}
-        \`\`\``;
+            [
+              "NEW_LEAD",
+              `name: ${name}`,
+              `email: ${email}`,
+              `phone: ${phone}`,
+              `vehicle: ${vehicle}`,
+              `budget: ${budget}`,
+              `details: ${details || "Not provided"}`,
+              `submitted_at: ${submittedAt}`,
+              `page_url: ${pageUrl}`,
+              "",
+              "```json",
+              JSON.stringify(zapPayload),
+              "```"
+            ].join("\n");
 
           // Human-friendly embed + Zap-friendly content
           const discordPayload = {
             username: "SVS Lead Bot",
-            content: contentForZapier,                 // <— Zapier reads this
-            allowed_mentions: { parse: [] },           // avoid accidental @everyone
+            content: contentForZapier,           // <— Zapier can read this if you still trigger from Discord
+            allowed_mentions: { parse: [] },     // avoid accidental @everyone
             embeds: [{
               title: "🚗 New Vehicle Sourcing Lead",
               color: 0xD4AF37,
               fields: [
-                { name: "👤 Full Name",        value: name,    inline: true },
-                { name: "📧 Email",            value: email,   inline: true },
-                { name: "📱 Phone",            value: phone,   inline: true },
-                { name: "🚙 Vehicle Wanted",   value: vehicle, inline: false },
-                { name: "💰 Budget Range",     value: budget,  inline: true },
+                { name: "👤 Full Name",          value: name,    inline: true },
+                { name: "📧 Email",              value: email,   inline: true },
+                { name: "📱 Phone",              value: phone,   inline: true },
+                { name: "🚙 Vehicle Wanted",     value: vehicle, inline: false },
+                { name: "💰 Budget Range",       value: budget,  inline: true },
                 { name: "📝 Additional Details", value: details || "None provided", inline: false }
               ],
               footer: { text: "Springers Vehicle Sourcing" },
@@ -713,7 +718,18 @@
             }]
           };
 
-          // Send to your existing Discord webhook (leave your URL as-is)
+          // 1) Fire-and-forget direct post to Zapier Catch Hook (cleanest way to get separate fields)
+          if (ZAPIER_CATCH_HOOK_URL && !/hooks\/catch\/XXXXX\/XXXXX/.test(ZAPIER_CATCH_HOOK_URL)) {
+            try {
+              fetch(ZAPIER_CATCH_HOOK_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(zapPayload)
+              }).catch(() => {});
+            } catch (_) { /* no-op */ }
+          }
+
+          // 2) Post to your existing Discord webhook for team notifications
           fetch('https://discord.com/api/webhooks/1413298108200390807/VTAoo6a1cd6psX0DlXk7qWn1D2nHAhEbpCtMu0Vtfo9m2z0_j9TUPuhvRnFdjxWsyWUI', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -822,4 +838,5 @@
     </script>
 </body>
 </html>
+
 
