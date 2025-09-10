@@ -634,39 +634,20 @@
         }
 
         // Form Submissions
-        // Replace your current form submission with this
-        document.getElementById('your-form').addEventListener('submit', async function(e) {
+        document.getElementById('hero-form').addEventListener('submit', function(e) {
             e.preventDefault();
-
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phoneNumber: document.getElementById('phone').value,
-                budget: document.getElementById('budget').value,
-                vehicleWanted: document.getElementById('vehicle').value
-            };
-
-            try {
-                const response = await fetch('/api/leads/submit', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    alert('Thank you! Your information has been submitted successfully.');
-                    // Clear form or redirect
-                } else {
-                    alert('Error: ' + result.error);
-                }
-            } catch (error) {
-                alert('Network error. Please try again.');
-            }
+            handleFormSubmission(this);
         });
+
+        document.getElementById('lead-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleFormSubmission(this);
+            closeLeadForm();
+        });
+
+        function handleFormSubmission(form) {
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
             
             // Get form data
             const name = data.name || form.querySelector('input[placeholder="Full Name"]')?.value || 'Not provided';
@@ -836,4 +817,3 @@
     </script>
 </body>
 </html>
-
