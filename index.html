@@ -645,98 +645,95 @@
             closeLeadForm();
         });
 
+        <script>
         function handleFormSubmission(form) {
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData);
-            
-            // Get form data
-            const name = data.name || form.querySelector('input[placeholder="Full Name"]')?.value || 'Not provided';
-            const email = data.email || form.querySelector('input[placeholder="Email Address"]')?.value || 'Not provided';
-            const phone = data.phone || form.querySelector('input[placeholder="Phone Number"]')?.value || 'Not provided';
-            const vehicle = data.vehicle || form.querySelector('input[placeholder*="Vehicle"]')?.value || 'Not provided';
-            const budget = data.budget || form.querySelector('select')?.value || 'Not provided';
-            const details = data.details || form.querySelector('textarea')?.value || 'Not provided';
-            
-            // Create Discord webhook payload
-            const discordPayload = {
-                embeds: [{
-                    title: "🚗 New Vehicle Sourcing Lead",
-                    color: 0xD4AF37, // Gold color
-                    fields: [
-                        {
-                            name: "👤 Name",
-                            value: name,
-                            inline: true
-                        },
-                        {
-                            name: "📧 Email",
-                            value: email,
-                            inline: true
-                        },
-                        {
-                            name: "📱 Phone Number",
-                            value: phone,
-                            inline: true
-                        },
-                        {
-                            name: "🚙 Vehicle Wanted",
-                            value: vehicle,
-                            inline: false
-                        },
-                        {
-                            name: "💰 Budget Range",
-                            value: budget,
-                            inline: true
-                        },
-                        {
-                            name: "📝 Additional Details",
-                            value: details || "None provided",
-                            inline: false
-                        }
-                    ],
-                    timestamp: new Date().toISOString(),
-                    footer: {
-                        text: "Springers Vehicle Sourcing | Lead Source: Website"
-                    }
-                }],
-                // Individual fields for Zapier to access separately
-                customer_name: name,
-                customer_email: email,
-                customer_phone: phone,
-                vehicle_wanted: vehicle,
-                budget_range: budget,
-                additional_details: details || "None provided",
-                lead_source: "Website Form",
-                date_captured: new Date().toISOString()
-            };
-            
-            // Send to Discord webhook
-            fetch('https://discord.com/api/webhooks/1413298108200390807/VTAoo6a1cd6psX0DlXk7qWn1D2nHAhEbpCtMu0Vtfo9m2z0_j9TUPuhvRnFdjxWsyWUI', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(discordPayload)
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Show success message
-                    alert('Thank you! We\'ll be in touch within 24 hours to start sourcing your dream vehicle.');
-                    // Reset form
-                    form.reset();
-                } else {
-                    throw new Error('Failed to submit form');
-                }
-            })
-            .catch(error => {
-                console.error('Error submitting form:', error);
-                // Still show success message to user but log error
-                alert('Thank you! We\'ll be in touch within 24 hours to start sourcing your dream vehicle.');
-                form.reset();
-            });
-            
-            console.log('Lead captured:', data);
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData);
+
+          // Read fields (works for both the hero form and the modal form)
+          const name = (data.name || form.querySelector('input[name="name"]')?.value || 'Not provided').trim();
+          const email = (data.email || form.querySelector('input[name="email"]')?.value || 'Not provided').trim();
+          const phone = (data.phone || form.querySelector('input[name="phone"]')?.value || 'Not provided').trim();
+          const vehicle = (data.vehicle || form.querySelector('input[name="vehicle"]')?.value || 'Not provided').trim();
+          const budget = (data.budget || form.querySelector('select[name="budget"]')?.value || 'Not provided').trim();
+          const details = (data.details || form.querySelector('textarea[name="details"]')?.value || 'Not provided').trim();
+
+          // Helpful metadata for your Zap
+          const submittedAt = new Date().toISOString();
+          const pageUrl = window.location.href;
+          const userAgent = navigator.userAgent;
+
+          // A clean JSON object we’ll include in the message content for Zapier to parse
+          const zapPayload = {
+            name,
+            email,
+            phone,
+            vehicle,
+            budget,
+            details,
+            submitted_at: submittedAt,
+            page_url: pageUrl,
+            user_agent: userAgent
+          };
+
+          // Plain text content for Zapier (easy to parse: key:value lines + JSON block)
+          const contentForZapier =
+        `NEW_LEAD
+        name: ${name}
+        email: ${email}
+        phone: ${phone}
+        vehicle: ${vehicle}
+        budget: ${budget}
+        details: ${details || 'Not provided'}
+        submitted_at: ${submittedAt}
+        page_url: ${pageUrl}
+
+        \`\`\`json
+        ${JSON.stringify(zapPayload)}
+        \`\`\``;
+
+          // Human-friendly embed + Zap-friendly content
+          const discordPayload = {
+            username: "SVS Lead Bot",
+            content: contentForZapier,                 // <— Zapier reads this
+            allowed_mentions: { parse: [] },           // avoid accidental @everyone
+            embeds: [{
+              title: "🚗 New Vehicle Sourcing Lead",
+              color: 0xD4AF37,
+              fields: [
+                { name: "👤 Full Name",        value: name,    inline: true },
+                { name: "📧 Email",            value: email,   inline: true },
+                { name: "📱 Phone",            value: phone,   inline: true },
+                { name: "🚙 Vehicle Wanted",   value: vehicle, inline: false },
+                { name: "💰 Budget Range",     value: budget,  inline: true },
+                { name: "📝 Additional Details", value: details || "None provided", inline: false }
+              ],
+              footer: { text: "Springers Vehicle Sourcing" },
+              timestamp: submittedAt
+            }]
+          };
+
+          // Send to your existing Discord webhook (leave your URL as-is)
+          fetch('https://discord.com/api/webhooks/1413298108200390807/VTAoo6a1cd6psX0DlXk7qWn1D2nHAhEbpCtMu0Vtfo9m2z0_j9TUPuhvRnFdjxWsyWUI', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(discordPayload)
+          })
+          .then(response => {
+            if (!response.ok) throw new Error('Failed to submit form');
+            alert('Thank you! We’ll be in touch within 24 hours to start sourcing your dream vehicle.');
+            form.reset();
+          })
+          .catch(err => {
+            console.error('Error submitting form:', err);
+            // Still show success to the user to reduce drop-off
+            alert('Thank you! We’ll be in touch within 24 hours to start sourcing your dream vehicle.');
+            form.reset();
+          });
+
+          console.log('Lead captured (structured):', zapPayload);
         }
+        </script>
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
