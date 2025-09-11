@@ -548,6 +548,9 @@
 
     <!-- JavaScript -->
     <script>
+        
+        const GOOGLE_SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwtvGC6Zq8UKvhurFUiKo754UpYN0wHJL1LVEl5BvNZcPwjVYUnIyFypSMOVOojgYrvwQ/exec";
+        
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileCloseBtn = document.getElementById('mobile-close-btn');
@@ -646,87 +649,72 @@
         });
 
         function handleFormSubmission(form) {
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData);
-            
-            // Get form data
-            const name = data.name || form.querySelector('input[placeholder="Full Name"]')?.value || 'Not provided';
-            const email = data.email || form.querySelector('input[placeholder="Email Address"]')?.value || 'Not provided';
-            const phone = data.phone || form.querySelector('input[placeholder="Phone Number"]')?.value || 'Not provided';
-            const vehicle = data.vehicle || form.querySelector('input[placeholder*="Vehicle"]')?.value || 'Not provided';
-            const budget = data.budget || form.querySelector('select')?.value || 'Not provided';
-            const details = data.details || form.querySelector('textarea')?.value || 'Not provided';
-            
-            // Create Discord webhook payload
-            const discordPayload = {
-                embeds: [{
-                    title: "🚗 New Vehicle Sourcing Lead",
-                    color: 0xD4AF37, // Gold color
-                    fields: [
-                        {
-                            name: "👤 Full Name",
-                            value: name,
-                            inline: true
-                        },
-                        {
-                            name: "📧 Email",
-                            value: email,
-                            inline: true
-                        },
-                        {
-                            name: "📱 Phone",
-                            value: phone,
-                            inline: true
-                        },
-                        {
-                            name: "🚙 Vehicle Wanted",
-                            value: vehicle,
-                            inline: false
-                        },
-                        {
-                            name: "💰 Budget Range",
-                            value: budget,
-                            inline: true
-                        },
-                        {
-                            name: "📝 Additional Details",
-                            value: details || "None provided",
-                            inline: false
-                        }
-                    ],
-                    timestamp: new Date().toISOString(),
-                    footer: {
-                        text: "Springers Vehicle Sourcing"
-                    }
-                }]
-            };
-            
-            // Send to Discord webhook
-            fetch('https://discord.com/api/webhooks/1413298108200390807/VTAoo6a1cd6psX0DlXk7qWn1D2nHAhEbpCtMu0Vtfo9m2z0_j9TUPuhvRnFdjxWsyWUI', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(discordPayload)
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Show success message
-                    alert('Thank you! We\'ll be in touch within 24 hours to start sourcing your dream vehicle.');
-                    // Reset form
-                    form.reset();
-                } else {
-                    throw new Error('Failed to submit form');
-                }
-            })
-            .catch(error => {
-                console.error('Error submitting form:', error);
-                // Still show success message to user but log error
-                alert('Thank you! We\'ll be in touch within 24 hours to start sourcing your dream vehicle.');
-                form.reset();
-            });
-            
-            console.log('Lead captured:', data);
+          const fd = new FormData(form);
+          const name    = (fd.get('name')    || form.querySelector('input[name="name"]')?.value    || '').trim();
+          const email   = (fd.get('email')   || form.querySelector('input[name="email"]')?.value   || '').trim();
+          const phone   = (fd.get('phone')   || form.querySelector('input[name="phone"]')?.value   || '').trim();
+          const vehicle = (fd.get('vehicle') || form.querySelector('input[name="vehicle"]')?.value || '').trim();
+          const budget  = (fd.get('budget')  || form.querySelector('select[name="budget"]')?.value || '').trim();
+          const details = (fd.get('details') || form.querySelector('textarea[name="details"]')?.value || '').trim();
+
+          const submittedAt = new Date().toISOString();
+          const pageUrl     = window.location.href;
+
+          // -------- 1) Send to Google Sheet (separate columns) --------
+          // Use FormData to avoid CORS preflight; do not set Content-Type header.
+          const sheetPayload = new FormData();
+          sheetPayload.append('submitted_at', submittedAt);
+          sheetPayload.append('name', name);
+          sheetPayload.append('email', email);
+          sheetPayload.append('phone', phone);
+          sheetPayload.append('vehicle', vehicle);
+          sheetPayload.append('budget', budget);
+          sheetPayload.append('details', details);
+          sheetPayload.append('page_url', pageUrl);
+
+          // Fire-and-forget (we don't need to read the response)
+          try {
+            fetch(GOOGLE_SHEET_WEB_APP_URL, {
+              method: 'POST',
+              body: sheetPayload,     // ← critical: keep as FormData (no headers)
+              // mode: 'no-cors'      // optional: uncomment if you ever see CORS errors
+            }).catch(() => {});
+          } catch (_) {}
+
+  // -------- 2) (Optional) Your existing Discord notification --------
+          const discordPayload = {
+            embeds: [{
+              title: "🚗 New Vehicle Sourcing Lead",
+              color: 0xD4AF37,
+              fields: [
+                { name: "👤 Full Name",          value: name || "—",    inline: true },
+                { name: "📧 Email",              value: email || "—",   inline: true },
+                { name: "📱 Phone",              value: phone || "—",   inline: true },
+                { name: "🚙 Vehicle Wanted",     value: vehicle || "—", inline: false },
+                { name: "💰 Budget Range",       value: budget || "—",  inline: true },
+                { name: "📝 Additional Details", value: details || "—", inline: false }
+              ],
+              timestamp: submittedAt,
+              footer: { text: "Springers Vehicle Sourcing" }
+            }]
+          };
+
+          fetch('https://discord.com/api/webhooks/1413298108200390807/VTAoo6a1cd6psX0DlXk7qWn1D2nHAhEbpCtMu0Vtfo9m2z0_j9TUPuhvRnFdjxWsyWUI', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(discordPayload)
+          })
+          .then(() => {
+            alert('Thank you! We’ll be in touch within 24 hours to start sourcing your dream vehicle.');
+            form.reset();
+          })
+          .catch(err => {
+            console.error('Error submitting form:', err);
+            alert('Thank you! We’ll be in touch within 24 hours to start sourcing your dream vehicle.');
+            form.reset();
+          });
+
+          console.log('Lead captured (to sheet + discord):', { name, email, phone, vehicle, budget, details, submittedAt, pageUrl });
         }
 
         // Smooth scrolling for anchor links
@@ -817,3 +805,4 @@
     </script>
 </body>
 </html>
+
