@@ -547,296 +547,312 @@
     </div>
 
     <!-- JavaScript -->
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileCloseBtn = document.getElementById('mobile-close-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileOverlay = document.getElementById('mobile-overlay');
-        const hamburger = document.querySelector('.hamburger');
+        <script>
+  /**********************
+   * UI & Navigation (unchanged from yours)
+   **********************/
+          const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+          const mobileCloseBtn = document.getElementById('mobile-close-btn');
+          const mobileMenu = document.getElementById('mobile-menu');
+          const mobileOverlay = document.getElementById('mobile-overlay');
+          const hamburger = document.querySelector('.hamburger');
 
-        function openMobileMenu() {
+          function openMobileMenu() {
             mobileMenu.classList.add('active');
             mobileOverlay.classList.add('active');
             hamburger.classList.add('active');
             document.body.style.overflow = 'hidden';
-        }
-
-        function closeMobileMenu() {
+          }
+          function closeMobileMenu() {
             mobileMenu.classList.remove('active');
             mobileOverlay.classList.remove('active');
             hamburger.classList.remove('active');
             document.body.style.overflow = 'auto';
-        }
-
-        mobileMenuBtn.addEventListener('click', openMobileMenu);
-        mobileCloseBtn.addEventListener('click', closeMobileMenu);
-        mobileOverlay.addEventListener('click', closeMobileMenu);
-
-        // Close mobile menu when clicking on navigation links
-        document.querySelectorAll('#mobile-menu a[href^="#"]').forEach(link => {
-            link.addEventListener('click', function() {
-                closeMobileMenu();
-                // Smooth scroll to section
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    setTimeout(() => {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }, 300);
-                }
-            });
-        });
-
-        // Lead Form Modal Functions
-        function openLeadForm() {
-            document.getElementById('lead-modal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLeadForm() {
-            document.getElementById('lead-modal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modals when clicking outside
-        document.getElementById('lead-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeLeadForm();
-            }
-        });
-
-        // Accordion Functions
-        function toggleAccordion(index) {
-            const content = document.querySelectorAll('.accordion-content')[index];
-            const icon = document.querySelectorAll('.accordion-icon')[index];
-            
-            if (content.classList.contains('active')) {
-                content.classList.remove('active');
-                icon.classList.remove('fa-minus');
-                icon.classList.add('fa-plus');
-            } else {
-                // Close all other accordions
-                document.querySelectorAll('.accordion-content').forEach((item, i) => {
-                    if (i !== index) {
-                        item.classList.remove('active');
-                        document.querySelectorAll('.accordion-icon')[i].classList.remove('fa-minus');
-                        document.querySelectorAll('.accordion-icon')[i].classList.add('fa-plus');
-                    }
-                });
-                
-                content.classList.add('active');
-                icon.classList.remove('fa-plus');
-                icon.classList.add('fa-minus');
-            }
-        }
-
-        // Form Submissions
-        document.getElementById('hero-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            handleFormSubmission(this);
-        });
-
-        document.getElementById('lead-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            handleFormSubmission(this);
-            closeLeadForm();
-        });
-
-        
-        // put your real Zapier Catch Hook here (or leave "" to disable direct post)
-        const ZAPIER_CATCH_HOOK_URL = "https://hooks.zapier.com/hooks/catch/24508671/udlqd4f/"; // ← replace
-
-        function handleFormSubmission(form) {
-          const formData = new FormData(form);
-          const data = Object.fromEntries(formData);
-
-          // Read fields (works for both the hero form and the modal form)
-          const name    = (data.name    || form.querySelector('input[name="name"]')?.value    || 'Not provided').trim();
-          const email   = (data.email   || form.querySelector('input[name="email"]')?.value   || 'Not provided').trim();
-          const phone   = (data.phone   || form.querySelector('input[name="phone"]')?.value   || 'Not provided').trim();
-          const vehicle = (data.vehicle || form.querySelector('input[name="vehicle"]')?.value || 'Not provided').trim();
-          const budget  = (data.budget  || form.querySelector('select[name="budget"]')?.value || 'Not provided').trim();
-          const details = (data.details || form.querySelector('textarea[name="details"]')?.value || 'Not provided').trim();
-
-          // Helpful metadata for your Zap
-          const submittedAt = new Date().toISOString();
-          const pageUrl     = window.location.href;
-          const userAgent   = navigator.userAgent;
-
-          // Clean JSON object for Zapier
-          const zapPayload = {
-            name,
-            email,
-            phone,
-            vehicle,
-            budget,
-            details,
-            submitted_at: submittedAt,
-            page_url: pageUrl,
-            user_agent: userAgent
-          };
-
-          // Plain text content (NO left padding) to keep Discord parsing simple if needed
-          const contentForZapier =
-            [
-              "NEW_LEAD",
-              `name: ${name}`,
-              `email: ${email}`,
-              `phone: ${phone}`,
-              `vehicle: ${vehicle}`,
-              `budget: ${budget}`,
-              `details: ${details || "Not provided"}`,
-              `submitted_at: ${submittedAt}`,
-              `page_url: ${pageUrl}`,
-              "",
-              "```json",
-              JSON.stringify(zapPayload),
-              "```"
-            ].join("\n");
-
-          // Human-friendly embed + Zap-friendly content
-          const discordPayload = {
-            username: "SVS Lead Bot",
-            content: contentForZapier,           // <— Zapier can read this if you still trigger from Discord
-            allowed_mentions: { parse: [] },     // avoid accidental @everyone
-            embeds: [{
-              title: "🚗 New Vehicle Sourcing Lead",
-              color: 0xD4AF37,
-              fields: [
-                { name: "👤 Full Name",          value: name,    inline: true },
-                { name: "📧 Email",              value: email,   inline: true },
-                { name: "📱 Phone",              value: phone,   inline: true },
-                { name: "🚙 Vehicle Wanted",     value: vehicle, inline: false },
-                { name: "💰 Budget Range",       value: budget,  inline: true },
-                { name: "📝 Additional Details", value: details || "None provided", inline: false }
-              ],
-              footer: { text: "Springers Vehicle Sourcing" },
-              timestamp: submittedAt
-            }]
-          };
-
-          // 1) Fire-and-forget direct post to Zapier Catch Hook (cleanest way to get separate fields)
-          if (ZAPIER_CATCH_HOOK_URL && !/hooks\/catch\/XXXXX\/XXXXX/.test(ZAPIER_CATCH_HOOK_URL)) {
-            try {
-              fetch(ZAPIER_CATCH_HOOK_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(zapPayload)
-              }).catch(() => {});
-            } catch (_) { /* no-op */ }
           }
+          mobileMenuBtn.addEventListener('click', openMobileMenu);
+          mobileCloseBtn.addEventListener('click', closeMobileMenu);
+          mobileOverlay.addEventListener('click', closeMobileMenu);
 
-          // 2) Post to your existing Discord webhook for team notifications
-          fetch('https://discord.com/api/webhooks/1413298108200390807/VTAoo6a1cd6psX0DlXk7qWn1D2nHAhEbpCtMu0Vtfo9m2z0_j9TUPuhvRnFdjxWsyWUI', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(discordPayload)
-          })
-          .then(response => {
-            if (!response.ok) throw new Error('Failed to submit form');
-            alert('Thank you! We’ll be in touch within 24 hours to start sourcing your dream vehicle.');
-            form.reset();
-          })
-          .catch(err => {
-            console.error('Error submitting form:', err);
-            // Still show success to the user to reduce drop-off
-            alert('Thank you! We’ll be in touch within 24 hours to start sourcing your dream vehicle.');
-            form.reset();
+          document.querySelectorAll('#mobile-menu a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function() {
+              closeMobileMenu();
+              const target = document.querySelector(this.getAttribute('href'));
+              if (target) {
+                setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+              }
+            });
           });
 
-          console.log('Lead captured (structured):', zapPayload);
-        }
+          function openLeadForm() {
+            document.getElementById('lead-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+          }
+          function closeLeadForm() {
+            document.getElementById('lead-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+          }
+          document.getElementById('lead-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeLeadForm();
+          });
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+          function toggleAccordion(index) {
+            const content = document.querySelectorAll('.accordion-content')[index];
+            const icon = document.querySelectorAll('.accordion-icon')[index];
+            if (content.classList.contains('active')) {
+              content.classList.remove('active');
+              icon.classList.remove('fa-minus'); icon.classList.add('fa-plus');
+            } else {
+              document.querySelectorAll('.accordion-content').forEach((item, i) => {
+                if (i !== index) {
+                  item.classList.remove('active');
+                  const ii = document.querySelectorAll('.accordion-icon')[i];
+                  ii.classList.remove('fa-minus'); ii.classList.add('fa-plus');
                 }
-            });
-        });
-
-        // Parallax effect for hero background (disabled on mobile for performance)
-        if (window.innerWidth > 768) {
-            window.addEventListener('scroll', function() {
-                const scrolled = window.pageYOffset;
-                const parallax = document.querySelector('.hero-bg');
-                if (parallax) {
-                    const speed = scrolled * 0.5;
-                    parallax.style.backgroundPosition = `center ${speed}px`;
-                }
-            });
-        }
-
-        // Handle window resize
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                closeMobileMenu();
+              });
+              content.classList.add('active');
+              icon.classList.remove('fa-plus'); icon.classList.add('fa-minus');
             }
-        });
+          }
 
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
+          // Smooth scroll anchors
+          document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+              e.preventDefault();
+              const target = document.querySelector(this.getAttribute('href'));
+              if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
-        }, observerOptions);
+          });
 
-        // Observe elements for animation
-        document.addEventListener('DOMContentLoaded', function() {
+          // Parallax hero (desktop only)
+          if (window.innerWidth > 768) {
+            window.addEventListener('scroll', function() {
+              const scrolled = window.pageYOffset;
+              const parallax = document.querySelector('.hero-bg');
+              if (parallax) parallax.style.backgroundPosition = `center ${scrolled * 0.5}px`;
+            });
+          }
+          window.addEventListener('resize', function() { if (window.innerWidth > 768) closeMobileMenu(); });
+
+          // Simple reveal on scroll
+          const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+              }
+            });
+          }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+          document.addEventListener('DOMContentLoaded', function() {
             const animateElements = document.querySelectorAll('section > div');
             animateElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
+              el.style.opacity = '0';
+              el.style.transform = 'translateY(30px)';
+              el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+              observer.observe(el);
             });
-        });
+          });
 
-        // Touch gesture support for mobile menu
-        let startX = 0;
-        let startY = 0;
-
-        document.addEventListener('touchstart', function(e) {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-        });
-
-        document.addEventListener('touchend', function(e) {
+          // Swipe to close mobile menu
+          let startX = 0, startY = 0;
+          document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; });
+          document.addEventListener('touchend', e => {
             if (!startX || !startY) return;
+            const endX = e.changedTouches[0].clientX, endY = e.changedTouches[0].clientY;
+            const diffX = startX - endX, diffY = startY - endY;
+            if (Math.abs(diffX) > Math.abs(diffY) && diffX < -50 && mobileMenu.classList.contains('active')) closeMobileMenu();
+            startX = 0; startY = 0;
+          });
 
-            let endX = e.changedTouches[0].clientX;
-            let endY = e.changedTouches[0].clientY;
+  /**********************
+   * ZAPIER-INTEGRATED LEAD CAPTURE
+   **********************/
 
-            let diffX = startX - endX;
-            let diffY = startY - endY;
+          // 1) Put your real Zapier Catch Hook here
+          //    (Tip: create a Zap → Trigger: Webhooks by Zapier (Catch Hook) → copy Custom Webhook URL)
+          const ZAPIER_CATCH_HOOK_URL = "https://hooks.zapier.com/hooks/catch/24508671/udlqd4f/"; // ← replace if needed
 
-            // Swipe right to close mobile menu
-            if (Math.abs(diffX) > Math.abs(diffY) && diffX < -50 && mobileMenu.classList.contains('active')) {
-                closeMobileMenu();
+          // 2) Optional: Discord notification (rotate your webhook if it was exposed publicly)
+          const USE_DISCORD_NOTIFICATIONS = false; // set true to enable
+          const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/XXXXXXXX/XXXXXXXXXXXXXXXXXXXX"; // replace if enabling
+
+          // Helpers
+          function getUTMParams() {
+            const p = new URLSearchParams(window.location.search);
+            const utm = {};
+            ["utm_source","utm_medium","utm_campaign","utm_term","utm_content"].forEach(k => {
+              if (p.get(k)) utm[k] = p.get(k);
+            });
+            return utm;
+          }
+          function uuid() {
+            // simple RFC4122-ish v4
+            return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+              (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+            );
+          }
+          function emailIsValid(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase());
+          }
+          function phonePretty(raw) {
+            const digits = (raw || "").replace(/\D/g, "");
+            if (digits.length === 11 && digits.startsWith("1")) return "+" + digits;
+            if (digits.length === 10) return "+1" + digits;
+            return raw || "";
+          }
+
+          // Capture both forms
+          const heroForm = document.getElementById('hero-form');
+          const leadForm = document.getElementById('lead-form');
+
+          heroForm.addEventListener('submit', onSubmit);
+          leadForm.addEventListener('submit', onSubmit);
+
+          let submitting = false;
+
+          async function onSubmit(e) {
+            e.preventDefault();
+            if (submitting) return;
+            submitting = true;
+
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnHTML = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Submitting…";
+
+            try {
+              const formData = new FormData(form);
+              const data = Object.fromEntries(formData);
+
+              const name    = (data.name || "").trim();
+              const email   = (data.email || "").trim();
+              const phone   = phonePretty((data.phone || "").trim());
+              const vehicle = (data.vehicle || "").trim();
+              const budget  = (data.budget || "").trim();
+              const details = (data.details || "").trim();
+
+              // Basic validation (Zapier will thank you)
+              if (!name || !email || !phone) {
+                throw new Error("Please fill out your name, email, and phone.");
+              }
+              if (!emailIsValid(email)) {
+                throw new Error("Please enter a valid email address.");
+              }
+
+              // Metadata
+              const submitted_at = new Date().toISOString();
+              const page_url     = window.location.href;
+              const referrer     = document.referrer || "";
+              const user_agent   = navigator.userAgent;
+              const utm          = getUTMParams();
+              const source       = (window.location.hostname || "unknown") + " / " + (referrer ? "ref:" + referrer : "direct");
+              const idempotency_key = uuid(); // allows dedupe in Zap if you store this
+
+              // Final clean JSON payload for Zapier
+              const zapPayload = {
+                // Lead fields
+                name,
+                email,
+                phone,
+                vehicle,
+                budget,
+                details,
+
+                // Marketing + context
+                submitted_at,
+                page_url,
+                referrer,
+                user_agent,
+                source,
+                ...utm,
+
+                // Delivery helpers
+                idempotency_key,
+                form_id: form.id,
+                site_title: document.title
+              };
+
+              // ---- PRIMARY: Send to Zapier with retry ----
+              await postWithRetry(ZAPIER_CATCH_HOOK_URL, zapPayload);
+
+              // ---- OPTIONAL: Discord team notification ----
+              if (USE_DISCORD_NOTIFICATIONS && DISCORD_WEBHOOK_URL.startsWith("https://discord.com/api/webhooks/")) {
+                const discordPayload = {
+                  username: "SVS Lead Bot",
+                  allowed_mentions: { parse: [] },
+                  embeds: [{
+                    title: "🚗 New Vehicle Sourcing Lead",
+                    color: 0xD4AF37,
+                    fields: [
+                      { name: "👤 Full Name",          value: name || "—",    inline: true },
+                      { name: "📧 Email",              value: email || "—",   inline: true },
+                      { name: "📱 Phone",              value: phone || "—",   inline: true },
+                      { name: "🚙 Vehicle Wanted",     value: vehicle || "—", inline: false },
+                      { name: "💰 Budget Range",       value: budget || "—",  inline: true },
+                      { name: "📝 Additional Details", value: details || "—", inline: false }
+                    ],
+                    footer: { text: "Springers Vehicle Sourcing" },
+                    timestamp: submitted_at
+                  }]
+                };
+                // fire-and-forget
+                fetch(DISCORD_WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(discordPayload) }).catch(()=>{});
+              }
+
+              alert('Thank you! We’ll be in touch within 24 hours to start sourcing your dream vehicle.');
+              form.reset();
+              if (form.id === 'lead-form') closeLeadForm();
+            } catch (err) {
+              console.error("Lead submit error:", err);
+              alert(err?.message || 'Something went wrong. Please try again.');
+            } finally {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalBtnHTML;
+              submitting = false;
+              console.log('Lead captured (structured):', new Date().toISOString());
             }
+          }
 
-            startX = 0;
-            startY = 0;
-        });
-    </script>
+          // Robust POST with retry and beacon fallback
+          async function postWithRetry(url, json, attempts = 2) {
+            const body = JSON.stringify(json);
+
+            for (let i = 0; i < attempts; i++) {
+              try {
+                const res = await fetch(url, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body,
+                  keepalive: true
+                });
+                const text = await res.text().catch(()=> "");
+                console.log("Zapier response:", res.status, text);
+                if (!res.ok) throw new Error(`Zapier returned ${res.status}`);
+                return true;
+              } catch (e) {
+                console.warn(`Zapier post attempt ${i+1} failed`, e);
+                if (i === attempts - 1) {
+                  // last resort: try sendBeacon (no CORS/headers)
+                  try {
+                    const blob = new Blob([body], { type: "application/json" });
+                    const ok = navigator.sendBeacon && navigator.sendBeacon(url, blob);
+                    console.log("Beacon fallback used:", !!ok);
+                    // We consider beacon "best effort"—it doesn't give response
+                    return true;
+                  } catch (be) {
+                    console.error("Beacon fallback failed:", be);
+                    throw e; // surface original error
+                  }
+                }
+                await new Promise(r => setTimeout(r, 600)); // brief backoff
+              }
+            }
+          }
+        </script>
+
 </body>
 </html>
+
 
 
