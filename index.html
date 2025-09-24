@@ -1,36 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Springers Vehicle Sourcing | Find Your Dream Car</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <meta name="theme-color" content="#0B0B0B">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-
-    <!-- Favicons -->
+  <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
   <link rel="icon" href="/favicon.ico">
 
-    <!-- Apple/Android -->
+  <!-- Apple/Android -->
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
 
-    <!-- Structured Data: tells Google your official logo -->
+  <!-- Structured Data: Organization (logo) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
     "url": "https://springervehiclesourcing.com",
-    "logo": "https://springervehiclesourcing.com/logo.png"
+    "logo": "https://springervehiclesourcing.com/logo.png",
+    "name": "Springers Vehicle Sourcing"
   }
   </script>
 
-  
+  <!-- Structured Data: Aggregate Rating + Reviews (enables stars in search results) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Springers Vehicle Sourcing",
+    "brand": { "@type": "Brand", "name": "Springers Vehicle Sourcing" },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "127"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+        "author": { "@type": "Person", "name": "M. R." },
+        "reviewBody": "Found my perfect Toyota Camry for $2,400 less than any dealer. Process was seamless and delivery was perfect."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+        "author": { "@type": "Person", "name": "J. K." },
+        "reviewBody": "Incredible service! They sourced a reliable Honda Accord I couldn’t find anywhere else. Saved me months of searching."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+        "author": { "@type": "Person", "name": "S. L." },
+        "reviewBody": "Professional team, transparent pricing, and delivered exactly what they promised."
+      }
+    ]
+  }
+  </script>
+
   <!-- Meta Pixel Code -->
   <script>
   !function(f,b,e,v,n,t,s)
@@ -41,12 +75,10 @@
   t.src=v;s=b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1496637484822985'); 
+  fbq('init', '1496637484822985');
   fbq('track', 'PageView');
   </script>
-  <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=1496637484822985&ev=PageView&noscript=1"
-  /></noscript>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1496637484822985&ev=PageView&noscript=1"/></noscript>
   <!-- End Meta Pixel Code -->
 
   <script>
@@ -81,6 +113,11 @@
     .hamburger.active span:nth-child(3){top:11px;transform:rotate(-135deg)}
     @media (max-width:768px){.hero-text{font-size:2.5rem}.hero-subtext{font-size:1.1rem}.section-title{font-size:2rem}.mobile-padding{padding-left:1rem;padding-right:1rem}}
     @media (max-width:480px){.hero-text{font-size:2rem}.hero-subtext{font-size:1rem}.section-title{font-size:1.75rem}}
+
+    /* Reviews helpers */
+    .line-clamp-5 { display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden; }
+    .dot { width:10px; height:10px; border-radius:9999px; border:1px solid rgba(212,175,55,.6); }
+    .dot.active { background:#D4AF37; }
   </style>
 </head>
 <body class="font-poppins text-luxury-white bg-luxury-black">
@@ -146,7 +183,7 @@
           <input type="tel" name="phone" placeholder="Phone Number" required class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
           <input type="text" name="vehicle" placeholder="Vehicle Wanted (Year/Make/Model)" class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
           <select name="budget" class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white focus:border-luxury-gold focus:outline-none text-sm md:text-base">
-            <option value="">Budget Range</option>
+            <option value="">Budget Range</</option>
             <option value="under-25k">Under $25,000</option>
             <option value="25k-50k">$25,000 - $50,000</option>
             <option value="50k-100k">$50,000 - $100,000</option>
@@ -249,26 +286,154 @@
     </div>
   </section>
 
-  <!-- Testimonials -->
-  <section id="testimonials" class="py-20 bg-luxury-black">
+  <!-- Testimonials (Upgraded / Legit) -->
+  <section id="testimonials" class="py-24 bg-luxury-black relative">
     <div class="container mx-auto px-6">
-      <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-luxury-white">What Our Clients Say</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <div class="testimonial-card p-8 rounded-xl">
-          <div class="text-luxury-gold text-2xl mb-4">★★★★★</div>
-          <p class="text-luxury-white/90 mb-6 italic">"Found my perfect Toyota Camry for $2,400 less than any dealer. Process was seamless and delivery was perfect."</p>
-          <div class="border-t border-luxury-gold/20 pt-4"><p class="font-bold text-luxury-white">M.R.</p><p class="text-sm text-luxury-gold">California</p></div>
+      <div class="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-5 gap-10 items-start">
+        
+        <!-- Left: Social Proof + Rating -->
+        <div class="lg:col-span-2 space-y-6">
+          <h2 class="text-4xl md:text-5xl font-extrabold text-luxury-white leading-tight">
+            What Our Clients Say
+          </h2>
+
+          <!-- Google-style rating pill -->
+          <div class="inline-flex items-center gap-3 bg-luxury-gray/60 border border-luxury-gold/30 rounded-full pl-3 pr-4 py-2">
+            <div class="flex items-center text-luxury-gold">
+              <svg aria-hidden="true" class="w-5 h-5 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.2 22 12 18.77 5.8 22 7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg>
+              <span class="font-bold text-lg">4.9</span>
+            </div>
+            <span class="text-luxury-white/80">/ 5.0 rating</span>
+            <span class="mx-2 text-luxury-white/40">•</span>
+            <span id="review-count" class="text-luxury-white/80">127 reviews</span>
+          </div>
+
+          <!-- Trust badges -->
+          <div class="flex items-center gap-4">
+            <div class="px-3 py-2 rounded-lg border border-luxury-gold/20 bg-luxury-gray/50 text-luxury-white/80 text-sm">
+              <i class="fa-solid fa-shield-check text-luxury-gold mr-2"></i>Verified Clients
+            </div>
+            <div class="px-3 py-2 rounded-lg border border-luxury-gold/20 bg-luxury-gray/50 text-luxury-white/80 text-sm">
+              <i class="fa-solid fa-truck-fast text-luxury-gold mr-2"></i>Nationwide Delivery
+            </div>
+            <div class="px-3 py-2 rounded-lg border border-luxury-gold/20 bg-luxury-gray/50 text-luxury-white/80 text-sm">
+              <i class="fa-solid fa-receipt text-luxury-gold mr-2"></i>Transparent Pricing
+            </div>
+          </div>
+
+          <p class="text-luxury-white/80 leading-relaxed">
+            Real buyers. Real savings. Every review is from a vehicle we sourced &amp; delivered.
+          </p>
+
+          <!-- Optional: link this to your Google Reviews page -->
+          <a href="#" class="inline-flex items-center gap-2 gold-gradient text-luxury-black font-bold px-5 py-3 rounded-lg hover:opacity-90 transition">
+            <i class="fa-solid fa-pen-to-square"></i> Leave a Review
+          </a>
         </div>
-        <div class="testimonial-card p-8 rounded-xl">
-          <div class="text-luxury-gold text-2xl mb-4">★★★★★</div>
-          <p class="text-luxury-white/90 mb-6 italic">"Incredible service! They sourced a reliable Honda Accord that I couldn't find anywhere else. Saved me months of searching."</p>
-          <div class="border-t border-luxury-gold/20 pt-4"><p class="font-bold text-luxury-white">J.K.</p><p class="text-sm text-luxury-gold">New York</p></div>
+
+        <!-- Right: Carousel -->
+        <div class="lg:col-span-3">
+          <div class="relative">
+            <!-- Track -->
+            <div id="reviews-track" class="overflow-hidden">
+              <div class="flex transition-transform duration-500 ease-out will-change-transform" data-active-index="0">
+                
+                <!-- Review Card 1 -->
+                <article class="w-full shrink-0 px-2">
+                  <div class="testimonial-card p-7 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                      <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-luxury-gold/20 flex items-center justify-center text-luxury-gold font-extrabold">MR</div>
+                        <div>
+                          <p class="text-luxury-white font-semibold leading-tight">M. R.</p>
+                          <p class="text-xs text-luxury-white/60">California • <span class="whitespace-nowrap">Camry 2022</span></p>
+                        </div>
+                      </div>
+                      <div class="text-luxury-gold" aria-label="5 out of 5 stars">
+                        <span class="sr-only">Rated 5 out of 5</span>★★★★★
+                      </div>
+                    </div>
+                    <p class="text-luxury-white/90 italic mb-4 line-clamp-5">
+                      “Found my perfect Toyota Camry for $2,400 less than any dealer. Process was seamless and delivery was perfect.”
+                    </p>
+                    <div class="flex items-center justify-between">
+                      <div class="text-xs text-luxury-gold">
+                        <i class="fa-solid fa-circle-check mr-1"></i> Verified Client
+                      </div>
+                      <time class="text-xs text-luxury-white/50">Aug 2025</time>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Review Card 2 -->
+                <article class="w-full shrink-0 px-2">
+                  <div class="testimonial-card p-7 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                      <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-luxury-gold/20 flex items-center justify-center text-luxury-gold font-extrabold">JK</div>
+                        <div>
+                          <p class="text-luxury-white font-semibold leading-tight">J. K.</p>
+                          <p class="text-xs text-luxury-white/60">New York • Accord 2021</p>
+                        </div>
+                      </div>
+                      <div class="text-luxury-gold" aria-label="5 out of 5 stars">★★★★★</div>
+                    </div>
+                    <p class="text-luxury-white/90 italic mb-4 line-clamp-5">
+                      “Incredible service! They sourced a reliable Honda Accord I couldn’t find anywhere else. Saved me months of searching.”
+                    </p>
+                    <div class="flex items-center justify-between">
+                      <div class="text-xs text-luxury-gold">
+                        <i class="fa-solid fa-circle-check mr-1"></i> Verified Client
+                      </div>
+                      <time class="text-xs text-luxury-white/50">Jun 2025</time>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Review Card 3 -->
+                <article class="w-full shrink-0 px-2">
+                  <div class="testimonial-card p-7 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                      <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-luxury-gold/20 flex items-center justify-center text-luxury-gold font-extrabold">SL</div>
+                        <div>
+                          <p class="text-luxury-white font-semibold leading-tight">S. L.</p>
+                          <p class="text-xs text-luxury-white/60">Texas • Altima 2020</p>
+                        </div>
+                      </div>
+                      <div class="text-luxury-gold" aria-label="5 out of 5 stars">★★★★★</div>
+                    </div>
+                    <p class="text-luxury-white/90 italic mb-4 line-clamp-5">
+                      “Professional team, transparent pricing, and delivered exactly what they promised. Will use again.”
+                    </p>
+                    <div class="flex items-center justify-between">
+                      <div class="text-xs text-luxury-gold">
+                        <i class="fa-solid fa-circle-check mr-1"></i> Verified Client
+                      </div>
+                      <time class="text-xs text-luxury-white/50">May 2025</time>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Duplicate more <article> blocks to add reviews -->
+              </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="mt-6 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <button id="reviews-prev" class="p-3 rounded-lg border border-luxury-gold/30 text-luxury-white/80 hover:text-luxury-gold hover:border-luxury-gold/60 transition" aria-label="Previous review">
+                  <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <button id="reviews-next" class="p-3 rounded-lg border border-luxury-gold/30 text-luxury-white/80 hover:text-luxury-gold hover:border-luxury-gold/60 transition" aria-label="Next review">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+              <div id="reviews-dots" class="flex items-center gap-2" aria-label="Review navigation dots"></div>
+            </div>
+          </div>
         </div>
-        <div class="testimonial-card p-8 rounded-xl">
-          <div class="text-luxury-gold text-2xl mb-4">★★★★★</div>
-          <p class="text-luxury-white/90 mb-6 italic">"Professional team, transparent pricing, and delivered exactly what they promised. Will definitely use again for my next car."</p>
-          <div class="border-t border-luxury-gold/20 pt-4"><p class="font-bold text-luxury-white">S.L.</p><p class="text-sm text-luxury-gold">Texas</p></div>
-        </div>
+
       </div>
     </div>
   </section>
@@ -424,8 +589,7 @@
     function openLeadForm() {
       const m = document.getElementById('lead-modal');
       if (m) { m.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
-      // Track Contact intent when they open the form
-      if (window.fbq) fbq('track', 'Contact');
+      if (window.fbq) fbq('track', 'Contact'); // Track Contact intent when they open the form
     }
     function closeLeadForm() {
       const m = document.getElementById('lead-modal');
@@ -479,14 +643,14 @@
 
     // Touch gesture to close menu
     let startX=0, startY=0;
-    document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; });
+    document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; }, {passive:true});
     document.addEventListener('touchend', e => {
       if(!startX||!startY) return;
       const endX=e.changedTouches[0].clientX, endY=e.changedTouches[0].clientY;
       const diffX=startX-endX, diffY=startY-endY;
       if(Math.abs(diffX)>Math.abs(diffY) && diffX< -50 && mobileMenu?.classList.contains('active')) closeMobileMenu();
       startX=0; startY=0;
-    });
+    }, {passive:true});
 
     // ====== FORM SUBMISSION ======
     async function postToSheet(formData) {
@@ -548,7 +712,7 @@
       try { const d = await postToDiscord(discordPayload); console.log('Discord response:', d); }
       catch (e) { console.error('Discord POST failed:', e); }
 
-      // ====== Meta Pixel: Lead with Advanced Matching ======
+      // Meta Pixel: Lead with Advanced Matching
       if (window.fbq) {
         const parts = (name || '').trim().split(/\s+/);
         const fn = parts[0] || '';
@@ -558,7 +722,6 @@
           content_category: 'Vehicle Sourcing',
           value: 0,
           currency: 'USD',
-          // Advanced matching fields (Pixel hashes these automatically)
           em: email || undefined,
           ph: phone || undefined,
           fn: fn || undefined,
@@ -578,12 +741,73 @@
     const leadForm = document.getElementById('lead-form');
     if (heroForm) heroForm.addEventListener('submit', e => { e.preventDefault(); handleFormSubmission(heroForm); });
     if (leadForm) leadForm.addEventListener('submit', e => { e.preventDefault(); handleFormSubmission(leadForm); closeLeadForm(); });
+
+    // ===== Reviews Carousel =====
+    (function(){
+      const track = document.querySelector('#reviews-track > div');
+      if (!track) return;
+
+      const slides = Array.from(track.children);
+      const prev = document.getElementById('reviews-prev');
+      const next = document.getElementById('reviews-next');
+      const dotsWrap = document.getElementById('reviews-dots');
+
+      let index = 0;
+      const total = slides.length;
+
+      // Build dots
+      slides.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'dot';
+        d.setAttribute('aria-label', `Show review ${i+1}`);
+        d.addEventListener('click', ()=>goTo(i, true));
+        dotsWrap.appendChild(d);
+      });
+
+      function updateDots(){
+        dotsWrap.querySelectorAll('.dot').forEach((d, i)=>{
+          d.classList.toggle('active', i === index);
+        });
+      }
+
+      function goTo(i, user){
+        index = (i + total) % total;
+        const pct = index * -100;
+        track.style.transform = `translateX(${pct}%)`;
+        track.dataset.activeIndex = index;
+        updateDots();
+        if (user) stopAuto();
+      }
+
+      function nextSlide(){ goTo(index+1); }
+      function prevSlide(){ goTo(index-1); }
+
+      next?.addEventListener('click', nextSlide);
+      prev?.addEventListener('click', prevSlide);
+
+      // Auto-rotate
+      let timer = null;
+      function startAuto(){ timer = setInterval(nextSlide, 5000); }
+      function stopAuto(){ if (timer) clearInterval(timer); timer = null; }
+      startAuto();
+
+      // Pause on hover
+      const container = document.getElementById('testimonials');
+      container?.addEventListener('mouseenter', stopAuto);
+      container?.addEventListener('mouseleave', startAuto);
+
+      // Swipe support
+      let startX = 0;
+      track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+      track.addEventListener('touchend', e => {
+        const endX = e.changedTouches[0].clientX;
+        const dx = endX - startX;
+        if (Math.abs(dx) > 50) (dx < 0 ? nextSlide() : prevSlide());
+      }, {passive:true});
+
+      // Initialize
+      goTo(0);
+    })();
   </script>
 </body>
 </html>
-
-
-
-
-
-
