@@ -118,6 +118,24 @@
     .line-clamp-5 { display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden; }
     .dot { width:10px; height:10px; border-radius:9999px; border:1px solid rgba(212,175,55,.6); }
     .dot.active { background:#D4AF37; }
+
+      /* Hero background with a soft dark overlay */
+    .hero-bg {
+      position: relative;
+      background-image:
+        linear-gradient(rgba(11,11,11,.60), rgba(11,11,11,.60)),
+        image-set(
+          url('/images/hero-worktrucks.jpg') type('image/jpeg')
+        );
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed; /* optional parallax feel */
+      color: #fff;
+    }
+    /* For mobile where fixed can be janky */
+    @media (max-width: 1024px) {
+      .hero-bg { background-attachment: scroll; }
+    }
   </style>
 </head>
 <body class="font-poppins text-luxury-white bg-luxury-black">
@@ -810,6 +828,7 @@
   </script>
 </body>
 </html>
+
 
 
 
