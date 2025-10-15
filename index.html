@@ -29,42 +29,6 @@
     "logo": "https://springervehiclesourcing.com/logo.png",
     "name": "Springers Vehicle Sourcing"
   }
-  </script>
-
-  <!-- Structured Data: Aggregate Rating + Reviews (enables stars in search results) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Springers Vehicle Sourcing",
-    "brand": { "@type": "Brand", "name": "Springers Vehicle Sourcing" },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "127"
-    },
-    "review": [
-      {
-        "@type": "Review",
-        "reviewRating": { "@type": "Rating", "ratingValue": "5" },
-        "author": { "@type": "Person", "name": "M. R." },
-        "reviewBody": "Found my perfect Toyota Camry for $2,400 less than any dealer. Process was seamless and delivery was perfect."
-      },
-      {
-        "@type": "Review",
-        "reviewRating": { "@type": "Rating", "ratingValue": "5" },
-        "author": { "@type": "Person", "name": "J. K." },
-        "reviewBody": "Incredible service! They sourced a reliable Honda Accord I couldn’t find anywhere else. Saved me months of searching."
-      },
-      {
-        "@type": "Review",
-        "reviewRating": { "@type": "Rating", "ratingValue": "5" },
-        "author": { "@type": "Person", "name": "S. L." },
-        "reviewBody": "Professional team, transparent pricing, and delivered exactly what they promised."
-      }
-    ]
-  }
-  </script>
 
   <!-- Meta Pixel Code -->
   <script>
@@ -115,10 +79,7 @@
     @media (max-width:768px){.hero-text{font-size:2.5rem}.hero-subtext{font-size:1.1rem}.section-title{font-size:2rem}.mobile-padding{padding-left:1rem;padding-right:1rem}}
     @media (max-width:480px){.hero-text{font-size:2rem}.hero-subtext{font-size:1rem}.section-title{font-size:1.75rem}}
 
-    /* Reviews helpers */
-    .line-clamp-5 { display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden; }
-    .dot { width:10px; height:10px; border-radius:9999px; border:1px solid rgba(212,175,55,.6); }
-    .dot.active { background:#D4AF37; }
+    
   </style>
 </head>
 <body class="font-poppins text-luxury-white bg-luxury-black">
@@ -132,7 +93,6 @@
         <div class="hidden md:flex items-center space-x-8">
           <a href="#how-it-works" class="text-luxury-white hover:text-luxury-gold transition duration-300"><i class="fas fa-cogs mr-2"></i>How It Works</a>
           <a href="calculator.html" class="text-luxury-white hover:text-luxury-gold transition duration-300"><i class="fas fa-calculator mr-2"></i>Finance Calculator</a>
-          <a href="#testimonials" class="text-luxury-white hover:text-luxury-gold transition duration-300"><i class="fas fa-star mr-2"></i>Reviews</a>
           <a href="#faq" class="text-luxury-white hover:text-luxury-gold transition duration-300"><i class="fas fa-question-circle mr-2"></i>FAQ</a>
           <button onclick="openLeadForm()" class="gold-gradient text-luxury-black px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition duration-300"><i class="fas fa-search mr-2"></i>Book Consultation</button>
         </div>
@@ -155,7 +115,6 @@
       <nav class="space-y-4">
         <a href="#how-it-works" class="block py-3 px-4 text-luxury-white hover:text-luxury-gold hover:bg-luxury-gold/10 rounded-lg transition duration-300"><i class="fas fa-cogs mr-3"></i>How It Works</a>
         <a href="calculator.html" class="block py-3 px-4 text-luxury-white hover:text-luxury-gold hover:bg-luxury-gold/10 rounded-lg transition duration-300"><i class="fas fa-calculator mr-3"></i>Finance Calculator</a>
-        <a href="#testimonials" class="block py-3 px-4 text-luxury-white hover:text-luxury-gold hover:bg-luxury-gold/10 rounded-lg transition duration-300"><i class="fas fa-star mr-3"></i>Reviews</a>
         <a href="#faq" class="block py-3 px-4 text-luxury-white hover:text-luxury-gold hover:bg-luxury-gold/10 rounded-lg transition duration-300"><i class="fas fa-question-circle mr-3"></i>FAQ</a>
         <div class="pt-4 border-t border-luxury-gold/20">
           <button onclick="openLeadForm(); closeMobileMenu();" class="w-full gold-gradient text-luxury-black px-6 py-4 rounded-lg font-bold hover:opacity-90 transition duration-300"><i class="fas fa-search mr-2"></i>Start Your Free Search Today!</button>
@@ -650,6 +609,7 @@
   </script>
 </body>
 </html>
+
 
 
 
