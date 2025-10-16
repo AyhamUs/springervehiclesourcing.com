@@ -250,16 +250,34 @@
 
   <!-- Calculator Logic + shared JS behaviors -->
   <script>
+    function num(n){ return isNaN(n) ? 0 : +n; }
+
+    function getNum(id){
+      const el = document.getElementById(id);
+      // If user typed something, use it; else fall back to the default
+      const raw = el.value.trim();
+      if(raw !== '') return num(raw);
+      const def = el.dataset.default || '';
+      return num(def);
+    }
+
+    // Auto-select the whole field on focus so typing replaces any digits instantly
+    ['price','down','trade','tax','apr','term','fees'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.addEventListener('focus', ()=> el.select());
+    });
+
     function fmt(n){ return n.toLocaleString(undefined,{maximumFractionDigits:2, minimumFractionDigits:2}); }
 
     function calc(){
-      const price = +document.getElementById('price').value || 0;
-      const down  = +document.getElementById('down').value || 0;
-      const trade = +document.getElementById('trade').value || 0;
-      const tax   = (+document.getElementById('tax').value || 0)/100;
-      const fees  = +document.getElementById('fees').value || 0;
-      const apr   = (+document.getElementById('apr').value || 0)/100;
-      const term  = Math.max(1, +document.getElementById('term').value || 1);
+      const price = getNum('price');
+      const down  = getNum('down');
+      const trade = getNum('trade');
+      const tax   = getNum('tax')/100;
+      const fees  = getNum('fees');
+      const apr   = getNum('apr')/100;
+      const term  = Math.max(1, getNum('term'));
 
       const taxable = Math.max(0, price - trade);
       const taxAmt  = taxable * tax;
@@ -294,4 +312,5 @@
   </script>
 </body>
 </html>
+
 
