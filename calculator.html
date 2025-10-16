@@ -121,33 +121,37 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <label class="block">
                 <span class="text-sm text-luxury-white/70">Vehicle Price ($)</span>
-                <input id="price" type="number" min="0" value="40000" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
+                <input id="price" type="number" min="0" placeholder="40,000" data-default="40000" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
+
               </label>
+              
               <label class="block">
                 <span class="text-sm text-luxury-white/70">Down Payment ($)</span>
-                <input id="down" type="number" min="0" value="5000" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
+                <input id="down" type="number" min="0" placeholder="5,000" data-default="5000" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
+
               </label>
+              
               <label class="block">
                 <span class="text-sm text-luxury-white/70">Trade-In Value ($)</span>
-                <input id="trade" type="number" min="0" value="0" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
+                <input id="trade" type="number" min="0" placeholder="0" data-default="0" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
               </label>
               <label class="block">
                 <span class="text-sm text-luxury-white/70">Sales Tax (%)</span>
-                <input id="tax" type="number" min="0" step="0.01" value="0" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
+                <input id="tax" type="number" min="0" step="0.01" placeholder="0.00" data-default="0" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
               </label>
               <label class="block">
                 <span class="text-sm text-luxury-white/70">APR (%)</span>
-                <input id="apr" type="number" min="0" step="0.01" value="6.5" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
+                <input id="apr" type="number" min="0" step="0.01" placeholder="6.50" data-default="6.5" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
               </label>
               <label class="block">
                 <span class="text-sm text-luxury-white/70">Term (months)</span>
-                <input id="term" type="number" min="1" value="60" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
+                <input id="term" type="number" min="1" placeholder="60" data-default="60" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
               </label>
             </div>
 
             <label class="block">
               <span class="text-sm text-luxury-white/70">Estimated Fees ($)</span>
-              <input id="fees" type="number" min="0" value="0" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
+              <input id="fees" type="number" min="0" placeholder="0" data-default="0" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
             </label>
 
             <button type="submit" class="w-full gold-gradient text-luxury-black py-3 rounded-lg text-lg font-bold hover:opacity-90 transition duration-300">
@@ -290,3 +294,4 @@
   </script>
 </body>
 </html>
+
