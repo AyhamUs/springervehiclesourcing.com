@@ -1,505 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Loan Calculator | Springers Vehicle Sourcing</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        luxury: {
-                            black: '#0B0B0B',
-                            gold: '#D4AF37',
-                            white: '#F5F5F5',
-                            gray: '#1A1A1A'
-                        }
-                    },
-                    fontFamily: {
-                        'poppins': ['Poppins', 'sans-serif'],
-                        'work-sans': ['Work Sans', 'sans-serif']
-                    }
-                }
-            }
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TZH28GWK');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finance Calculator | Springers Vehicle Sourcing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <meta name="theme-color" content="#0B0B0B">
+
+  <!-- Fonts (match homepage) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Favicons (same files as homepage root) -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Meta Pixel (match homepage) -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1496637484822985');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1496637484822985&ev=PageView&noscript=1"/></noscript>
+  <!-- End Meta Pixel -->
+
+  <!-- Tailwind theme (match homepage) -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            luxury: { black:'#0B0B0B', gold:'#D4AF37', white:'#F5F5F5', gray:'#1A1A1A' }
+          },
+          fontFamily: { 'poppins':['Poppins','sans-serif'], 'work-sans':['Work Sans','sans-serif'] }
         }
-    </script>
-    <style>
-        .hero-bg {
-            background: linear-gradient(rgba(11, 11, 11, 0.8), rgba(11, 11, 11, 0.6)), 
-                        url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"%3E%3Crect fill="%23000" width="1200" height="800"/%3E%3Cpath fill="%23111" d="M0,600 Q200,500 400,550 T800,520 T1200,580 L1200,800 L0,800 Z"/%3E%3Ccircle fill="%23D4AF37" opacity="0.1" cx="900" cy="200" r="150"/%3E%3Ccircle fill="%23D4AF37" opacity="0.05" cx="300" cy="400" r="100"/%3E%3C/svg%3E');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        .gold-gradient {
-            background: linear-gradient(45deg, #D4AF37, #F4E799);
-        }
-        .calculator-input {
-            background: rgba(11, 11, 11, 0.5);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 0.5rem;
-            padding: 1rem;
-            color: #F5F5F5;
-            width: 100%;
-            font-size: 1.1rem;
-        }
-        .calculator-input:focus {
-            border-color: #D4AF37;
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
-        }
-        .result-card {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(11, 11, 11, 0.9));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-        }
-        
-        /* Mobile Menu Styles */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 80%;
-            max-width: 320px;
-            height: 100vh;
-            background: rgba(26, 26, 26, 0.98);
-            backdrop-filter: blur(20px);
-            border-left: 1px solid rgba(212, 175, 55, 0.2);
-            transition: right 0.3s ease-in-out;
-            z-index: 1000;
-            overflow-y: auto;
-        }
-        
-        .mobile-menu.active {
-            right: 0;
-        }
-        
-        .mobile-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        
-        .mobile-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .hamburger {
-            width: 24px;
-            height: 24px;
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .hamburger span {
-            display: block;
-            position: absolute;
-            height: 2px;
-            width: 100%;
-            background: #F5F5F5;
-            border-radius: 1px;
-            opacity: 1;
-            left: 0;
-            transform: rotate(0deg);
-            transition: .25s ease-in-out;
-        }
-        
-        .hamburger span:nth-child(1) {
-            top: 4px;
-        }
-        
-        .hamburger span:nth-child(2) {
-            top: 11px;
-        }
-        
-        .hamburger span:nth-child(3) {
-            top: 18px;
-        }
-        
-        .hamburger.active span:nth-child(1) {
-            top: 11px;
-            transform: rotate(135deg);
-        }
-        
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-            left: -60px;
-        }
-        
-        .hamburger.active span:nth-child(3) {
-            top: 11px;
-            transform: rotate(-135deg);
-        }
-    </style>
+      }
+    }
+  </script>
+
+  <!-- Styles (match homepage) -->
+  <style>
+    .hero-bg{
+      background-image:linear-gradient(rgba(11,11,11,0.65),rgba(11,11,11,0.55)),
+      url('https://AyhamUs.github.io/springervehiclesourcing.com/hero-worktrucks.png?v=7');
+      background-size:cover;background-position:center center;background-repeat:no-repeat;background-attachment:scroll
+    }
+    @media(min-width:1024px){.hero-bg{background-attachment:fixed}}
+    .gold-gradient{background:linear-gradient(45deg,#D4AF37,#F4E799)}
+    .text-gold{color:#D4AF37}
+    .card{background:linear-gradient(135deg,rgba(212,175,55,.1),rgba(11,11,11,.9));backdrop-filter:blur(10px);border:1px solid rgba(212,175,55,.2)}
+    @media (max-width:768px){.hero-text{font-size:2.5rem}.hero-subtext{font-size:1.1rem}}
+    @media (max-width:480px){.hero-text{font-size:2rem}.hero-subtext{font-size:1rem}}
+    input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0;}
+    input[type="number"] { -moz-appearance: textfield; }
+  </style>
 </head>
 <body class="font-poppins text-luxury-white bg-luxury-black">
-    <!-- Header/Navigation -->
-    <header class="bg-luxury-black/90 backdrop-blur-md border-b border-luxury-gold/20 sticky top-0 z-50 font-work-sans">
-        <nav class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <img src="logo.png" alt="Springers Vehicle Sourcing" class="h-12 w-auto">
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-luxury-white hover:text-luxury-gold transition duration-300">
-                        <i class="fas fa-home mr-2"></i>Home
-                    </a>
-                    <a href="index.html#how-it-works" class="text-luxury-white hover:text-luxury-gold transition duration-300">
-                        <i class="fas fa-cogs mr-2"></i>How It Works
-                    </a>
-                    <a href="calculator.html" class="text-luxury-gold font-semibold">
-                        <i class="fas fa-calculator mr-2"></i>Finance Calculator
-                    </a>
-                    <a href="index.html#testimonials" class="text-luxury-white hover:text-luxury-gold transition duration-300">
-                        <i class="fas fa-star mr-2"></i>Reviews
-                    </a>
-                    <a href="index.html#faq" class="text-luxury-white hover:text-luxury-gold transition duration-300">
-                        <i class="fas fa-question-circle mr-2"></i>FAQ
-                    </a>
-                    <a href="index.html#contact" class="gold-gradient text-luxury-black px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition duration-300">
-                        <i class="fas fa-search mr-2"></i>Start My Search
-                    </a>
-                </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="hamburger">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
-            </div>
-        </nav>
-    </header>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TZH28GWK"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-overlay" class="mobile-overlay"></div>
-    
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu font-work-sans">
-        <div class="p-6">
-            <div class="flex items-center justify-between mb-8">
-                <img src="logo.png" alt="Springers Vehicle Sourcing" class="h-8 w-auto">
-                <button id="mobile-close-btn" class="text-luxury-white hover:text-luxury-gold">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <nav class="space-y-4">
-                <a href="index.html" class="block py-3 px-4 text-luxury-white hover:text-luxury-gold hover:bg-luxury-gold/10 rounded-lg transition duration-300">
-                    <i class="fas fa-home mr-3"></i>Home
-                </a>
-                <a href="index.html#how-it-works" class="block py-3 px-4 text-luxury-white hover:text-luxury-gold hover:bg-luxury-gold/10 rounded-lg transition duration-300">
-                    <i class="fas fa-cogs mr-3"></i>How It Works
-                </a>
-                <a href="calculator.html" class="block py-3 px-4 text-luxury-gold bg-luxury-gold/10 rounded-lg font-semibold">
-                    <i class="fas fa-calculator mr-3"></i>Finance Calculator
-                </a>
-                <a href="index.html#testimonials" class="block py-3 px-4 text-luxury-white hover:text-luxury-gold hover:bg-luxury-gold/10 rounded-lg transition duration-300">
-                    <i class="fas fa-star mr-3"></i>Reviews
-                </a>
-                <a href="index.html#faq" class="block py-3 px-4 text-luxury-white hover:text-luxury-gold hover:bg-luxury-gold/10 rounded-lg transition duration-300">
-                    <i class="fas fa-question-circle mr-3"></i>FAQ
-                </a>
-                <div class="pt-4 border-t border-luxury-gold/20">
-                    <a href="index.html#contact" class="block w-full gold-gradient text-luxury-black px-6 py-4 rounded-lg font-bold hover:opacity-90 transition duration-300 text-center">
-                        <i class="fas fa-search mr-2"></i>Start My Search
-                    </a>
-                </div>
-            </nav>
+  <!-- Header / Navigation (copied to match) -->
+  <header class="bg-luxury-black/90 backdrop-blur-md border-b border-luxury-gold/20 sticky top-0 z-50 font-work-sans">
+    <nav class="container mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <a href="index.html"><img src="logo.png" alt="Springers Vehicle Sourcing" class="h-24 w-auto"></a>
         </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="index.html#how-it-works" class="text-luxury-white hover:text-luxury-gold transition duration-300"><i class="fas fa-cogs mr-2"></i>How It Works</a>
+          <a href="calculator.html" class="text-luxury-gold font-semibold transition duration-300"><i class="fas fa-calculator mr-2"></i>Finance Calculator</a>
+          <a href="index.html#faq" class="text-luxury-white hover:text-luxury-gold transition duration-300"><i class="fas fa-question-circle mr-2"></i>FAQ</a>
+          <button onclick="openLeadForm()" class="gold-gradient text-luxury-black px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition duration-300">
+            <i class="fas fa-search mr-2"></i>Book Consultation
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero (same background/look) -->
+  <section class="hero-bg py-20 md:py-28 text-center">
+    <div class="container mx-auto px-6">
+      <h1 class="hero-text text-4xl md:text-6xl font-extrabold mb-4 text-gold" style="font-family:'Montserrat',sans-serif;">Finance Calculator</h1>
+      <p class="hero-subtext text-lg md:text-2xl text-luxury-white/90 max-w-3xl mx-auto">
+        Estimate payments with the same premium experience as our homepage.
+      </p>
     </div>
+  </section>
 
-    <!-- Hero Section -->
-    <section class="hero-bg py-20">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-6xl font-black mb-6 text-luxury-white leading-tight">
-                Auto Loan <span class="text-luxury-gold">Calculator</span>
-            </h1>
-            <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-luxury-white/90 font-light">
-                Calculate your monthly payment and see how much you can afford for your dream vehicle.
-            </p>
-        </div>
-    </section>
-
-    <!-- Calculator Section -->
-    <section class="py-20 bg-luxury-gray">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    <!-- Calculator Form -->
-                    <div class="bg-luxury-black/50 p-8 rounded-2xl border border-luxury-gold/20">
-                        <h2 class="text-3xl font-bold mb-8 text-luxury-white">Calculate Your Payment</h2>
-                        <form id="calculator-form" class="space-y-6">
-                            <div>
-                                <label class="block text-luxury-white font-semibold mb-2">Vehicle Price</label>
-                                <div class="relative">
-                                    <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-luxury-gold font-bold">$</span>
-                                    <input type="number" id="vehiclePrice" placeholder="50000" class="calculator-input pl-8" min="0" step="1000">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-luxury-white font-semibold mb-2">Down Payment</label>
-                                <div class="relative">
-                                    <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-luxury-gold font-bold">$</span>
-                                    <input type="number" id="downPayment" placeholder="10000" class="calculator-input pl-8" min="0" step="500">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-luxury-white font-semibold mb-2">Interest Rate (APR)</label>
-                                <div class="relative">
-                                    <input type="number" id="interestRate" placeholder="6.5" class="calculator-input pr-8" min="0" max="30" step="0.1">
-                                    <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-luxury-gold font-bold">%</span>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-luxury-white font-semibold mb-2">Loan Term</label>
-                                <select id="loanTerm" class="calculator-input">
-                                    <option value="">Select loan term</option>
-                                    <option value="36">36 months (3 years)</option>
-                                    <option value="48">48 months (4 years)</option>
-                                    <option value="60">60 months (5 years)</option>
-                                    <option value="72">72 months (6 years)</option>
-                                    <option value="84">84 months (7 years)</option>
-                                </select>
-                            </div>
-                            <button type="button" onclick="calculateLoan()" class="w-full gold-gradient text-luxury-black py-4 rounded-lg text-xl font-bold hover:opacity-90 transition duration-300">
-                                <i class="fas fa-calculator mr-2"></i>
-                                Calculate Payment
-                            </button>
-                        </form>
-                    </div>
-
-                    <!-- Results Panel -->
-                    <div class="space-y-6">
-                        <div id="results" class="hidden">
-                            <div class="result-card p-8 rounded-2xl">
-                                <h3 class="text-2xl font-bold mb-6 text-luxury-white">Payment Breakdown</h3>
-                                
-                                <div class="space-y-4">
-                                    <div class="flex justify-between items-center py-3 border-b border-luxury-gold/20">
-                                        <span class="text-luxury-white/80">Monthly Payment</span>
-                                        <span id="monthlyPayment" class="text-3xl font-bold text-luxury-gold">$0</span>
-                                    </div>
-                                    <div class="flex justify-between items-center py-3 border-b border-luxury-gold/20">
-                                        <span class="text-luxury-white/80">Total Loan Amount</span>
-                                        <span id="loanAmount" class="text-xl font-semibold text-luxury-white">$0</span>
-                                    </div>
-                                    <div class="flex justify-between items-center py-3 border-b border-luxury-gold/20">
-                                        <span class="text-luxury-white/80">Total Interest</span>
-                                        <span id="totalInterest" class="text-xl font-semibold text-luxury-white">$0</span>
-                                    </div>
-                                    <div class="flex justify-between items-center py-3">
-                                        <span class="text-luxury-white/80">Total Cost</span>
-                                        <span id="totalCost" class="text-xl font-semibold text-luxury-white">$0</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tips -->
-                        <div class="bg-luxury-black/30 p-6 rounded-xl border border-luxury-gold/20">
-                            <h4 class="text-xl font-bold mb-4 text-luxury-gold">
-                                <i class="fas fa-lightbulb mr-2"></i>
-                                Financing Tips
-                            </h4>
-                            <ul class="space-y-3 text-luxury-white/80">
-                                <li class="flex items-start space-x-2">
-                                    <i class="fas fa-check text-luxury-gold mt-1"></i>
-                                    <span>A larger down payment reduces monthly payments</span>
-                                </li>
-                                <li class="flex items-start space-x-2">
-                                    <i class="fas fa-check text-luxury-gold mt-1"></i>
-                                    <span>Shorter loan terms mean higher payments but less interest</span>
-                                </li>
-                                <li class="flex items-start space-x-2">
-                                    <i class="fas fa-check text-luxury-gold mt-1"></i>
-                                    <span>Shop around for the best interest rates</span>
-                                </li>
-                                <li class="flex items-start space-x-2">
-                                    <i class="fas fa-check text-luxury-gold mt-1"></i>
-                                    <span>Consider pre-approval before shopping</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+  <!-- Calculator -->
+  <section class="py-12 md:py-16">
+    <div class="container mx-auto px-6 max-w-5xl">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Inputs -->
+        <div class="card p-6 md:p-8 rounded-2xl">
+          <h2 class="text-2xl md:text-3xl font-bold mb-6">Your Details</h2>
+          <form id="calc-form" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <label class="block">
+                <span class="text-sm text-luxury-white/70">Vehicle Price ($)</span>
+                <input id="price" type="number" min="0" value="40000" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
+              </label>
+              <label class="block">
+                <span class="text-sm text-luxury-white/70">Down Payment ($)</span>
+                <input id="down" type="number" min="0" value="5000" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
+              </label>
+              <label class="block">
+                <span class="text-sm text-luxury-white/70">Trade-In Value ($)</span>
+                <input id="trade" type="number" min="0" value="0" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
+              </label>
+              <label class="block">
+                <span class="text-sm text-luxury-white/70">Sales Tax (%)</span>
+                <input id="tax" type="number" min="0" step="0.01" value="0" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
+              </label>
+              <label class="block">
+                <span class="text-sm text-luxury-white/70">APR (%)</span>
+                <input id="apr" type="number" min="0" step="0.01" value="6.5" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
+              </label>
+              <label class="block">
+                <span class="text-sm text-luxury-white/70">Term (months)</span>
+                <input id="term" type="number" min="1" value="60" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
+              </label>
             </div>
-        </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="py-20 bg-luxury-black">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-luxury-white">Ready to Find Your Dream Car?</h2>
-            <p class="text-xl mb-8 max-w-3xl mx-auto text-luxury-white/90">
-                Now that you know your budget, let us help you find the perfect vehicle at the best price.
-            </p>
-            <a href="index.html#contact" class="gold-gradient text-luxury-black px-12 py-6 rounded-lg text-2xl font-black hover:opacity-90 transition duration-300 inline-flex items-center space-x-3">
-                <span>🚗 Start Vehicle Search</span>
-                <i class="fas fa-arrow-right"></i>
+            <label class="block">
+              <span class="text-sm text-luxury-white/70">Estimated Fees ($)</span>
+              <input id="fees" type="number" min="0" value="0" class="w-full mt-1 px-4 py-3 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg focus:border-luxury-gold outline-none">
+            </label>
+
+            <button type="submit" class="w-full gold-gradient text-luxury-black py-3 rounded-lg text-lg font-bold hover:opacity-90 transition duration-300">
+              Calculate Payment
+            </button>
+            <p class="text-xs text-luxury-white/60 text-center">This is an estimate and not a financing offer.</p>
+          </form>
+        </div>
+
+        <!-- Results -->
+        <div class="card p-6 md:p-8 rounded-2xl">
+          <h2 class="text-2xl md:text-3xl font-bold mb-6">Your Estimate</h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+            <div class="rounded-xl border border-luxury-gold/20 p-4 bg-luxury-gray/50">
+              <p class="text-sm text-luxury-white/70">Monthly Payment</p>
+              <p id="out-monthly" class="text-3xl font-extrabold text-gold mt-1">$—</p>
+            </div>
+            <div class="rounded-xl border border-luxury-gold/20 p-4 bg-luxury-gray/50">
+              <p class="text-sm text-luxury-white/70">Amount Financed</p>
+              <p id="out-financed" class="text-2xl font-bold mt-1">$—</p>
+            </div>
+            <div class="rounded-xl border border-luxury-gold/20 p-4 bg-luxury-gray/50">
+              <p class="text-sm text-luxury-white/70">Total Interest</p>
+              <p id="out-interest" class="text-2xl font-bold mt-1">$—</p>
+            </div>
+            <div class="rounded-xl border border-luxury-gold/20 p-4 bg-luxury-gray/50">
+              <p class="text-sm text-luxury-white/70">Total Cost</p>
+              <p id="out-total" class="text-2xl font-bold mt-1">$—</p>
+            </div>
+          </div>
+
+          <div class="rounded-xl border border-luxury-gold/20 p-4 bg-luxury-gray/40">
+            <p class="text-sm text-luxury-white/70 mb-2">Amortization Snapshot</p>
+            <div class="text-xs text-luxury-white/70">First payment: <span id="snap-first">—</span> • Last payment: <span id="snap-last">—</span></div>
+          </div>
+
+          <div class="mt-6">
+            <a href="index.html" class="inline-flex items-center gap-2 gold-gradient text-luxury-black font-bold px-6 py-3 rounded-lg hover:opacity-90 transition">
+              <i class="fa-solid fa-arrow-left"></i> Back to Home
             </a>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="bg-luxury-gray border-t border-luxury-gold/20 py-12">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <img src="logo.png" alt="Springers Vehicle Sourcing" class="h-10 w-auto">
-                    </div>
-                    <p class="text-luxury-white/80 leading-relaxed">Your trusted partner in finding and delivering dream vehicles nationwide.</p>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-4 text-luxury-white">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="index.html" class="text-luxury-white/80 hover:text-luxury-gold transition duration-300">Home</a></li>
-                        <li><a href="index.html#how-it-works" class="text-luxury-white/80 hover:text-luxury-gold transition duration-300">How It Works</a></li>
-                        <li><a href="index.html#testimonials" class="text-luxury-white/80 hover:text-luxury-gold transition duration-300">Reviews</a></li>
-                        <li><a href="index.html#faq" class="text-luxury-white/80 hover:text-luxury-gold transition duration-300">FAQ</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mb-4 text-luxury-white">Contact Info</h4>
-                    <p class="text-luxury-white/80 mb-4">Ready to find your dream car? Get in touch with our team today.</p>
-                    <a href="index.html#contact" class="gold-gradient text-luxury-black px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition duration-300">Start My Search</a>
-                </div>
-            </div>
-            <div class="border-t border-luxury-gold/20 mt-8 pt-8 text-center">
-                <p class="text-luxury-white/80">&copy; 2025 Springers Vehicle Sourcing. All rights reserved.</p>
-            </div>
+  <!-- Footer (match homepage tone) -->
+  <footer class="bg-luxury-gray border-t border-luxury-gold/20 py-12">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <div class="flex items-center space-x-3 mb-4"><img src="logo.png" alt="Springers Vehicle Sourcing" class="h-10 w-auto"></div>
+          <p class="text-luxury-white/80 leading-relaxed">Your Trusted Partner in Finding and Delivering Fleet Vehicles Nationwide.</p>
         </div>
-    </footer>
+        <div>
+          <h4 class="text-lg font-bold mb-4 text-luxury-white">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="index.html#how-it-works" class="text-luxury-white/80 hover:text-luxury-gold transition duration-300">How It Works</a></li>
+            <li><a href="calculator.html" class="text-luxury-white/80 hover:text-luxury-gold transition duration-300">Finance Calculator</a></li>
+            <li><a href="index.html#faq" class="text-luxury-white/80 hover:text-luxury-gold transition duration-300">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-bold mb-4 text-luxury-white">Contact Info</h4>
+          <p class="text-luxury-white/80 mb-4">Ready to Find Fleet Vehicles at Wholesale Prices? Get in Touch With Our Team Today.</p>
+          <button onclick="openLeadForm()" class="gold-gradient text-luxury-black px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition duration-300">Book Consultation</button>
+        </div>
+      </div>
+      <div class="border-t border-luxury-gold/20 mt-8 pt-8 text-center">
+        <p class="text-luxury-white/80">&copy; 2025 Springers Vehicle Sourcing. All rights reserved.</p>
+        <p class="text-xs text-luxury-white/60 mt-2">By submitting any form, you agree to receive automated texts &amp; emails. Reply STOP to unsubscribe.</p>
+      </div>
+    </div>
+  </footer>
 
-    <!-- JavaScript -->
-    <script>
-        // Mobile menu functionality
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileCloseBtn = document.getElementById('mobile-close-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileOverlay = document.getElementById('mobile-overlay');
-        const hamburger = document.querySelector('.hamburger');
+  <!-- Lead Form Modal (optional, matches homepage behavior) -->
+  <div id="lead-modal" class="fixed inset-0 bg-luxury-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-luxury-gray rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-luxury-gold/20">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-2xl font-bold text-luxury-white">Start Your Vehicle Search</h3>
+        <button onclick="closeLeadForm()" class="text-luxury-white/60 hover:text-luxury-white text-2xl"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="lead-form" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="text" name="name" placeholder="Full Name" required class="w-full px-4 py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none">
+          <input type="email" name="email" placeholder="Email Address" required class="w-full px-4 py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none">
+        </div>
+        <input type="tel" name="phone" placeholder="Phone Number" required class="w-full px-4 py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none">
+        <textarea name="details" placeholder="Additional details or special requirements..." rows="3" class="w-full px-4 py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold outline-none"></textarea>
+        <button type="submit" class="w-full gold-gradient text-luxury-black py-4 rounded-lg text-xl font-bold hover:opacity-90 transition duration-300">Book Consultation</button>
+        <p class="text-xs text-luxury-white/60 text-center">By submitting, you agree to receive automated texts &amp; emails. Msg & data rates may apply. Reply STOP to unsubscribe.</p>
+      </form>
+    </div>
+  </div>
 
-        function openMobileMenu() {
-            mobileMenu.classList.add('active');
-            mobileOverlay.classList.add('active');
-            if (hamburger) hamburger.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+  <!-- Calculator Logic + shared JS behaviors -->
+  <script>
+    function fmt(n){ return n.toLocaleString(undefined,{maximumFractionDigits:2, minimumFractionDigits:2}); }
 
-        function closeMobileMenu() {
-            mobileMenu.classList.remove('active');
-            mobileOverlay.classList.remove('active');
-            if (hamburger) hamburger.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+    function calc(){
+      const price = +document.getElementById('price').value || 0;
+      const down  = +document.getElementById('down').value || 0;
+      const trade = +document.getElementById('trade').value || 0;
+      const tax   = (+document.getElementById('tax').value || 0)/100;
+      const fees  = +document.getElementById('fees').value || 0;
+      const apr   = (+document.getElementById('apr').value || 0)/100;
+      const term  = Math.max(1, +document.getElementById('term').value || 1);
 
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', openMobileMenu);
-        }
-        
-        if (mobileCloseBtn) {
-            mobileCloseBtn.addEventListener('click', closeMobileMenu);
-        }
-        
-        if (mobileOverlay) {
-            mobileOverlay.addEventListener('click', closeMobileMenu);
-        }
+      const taxable = Math.max(0, price - trade);
+      const taxAmt  = taxable * tax;
+      const netPrice = price + taxAmt + fees - down - trade;
+      const principal = Math.max(0, netPrice);
 
-        // Close mobile menu when clicking on menu links
-        const mobileLinks = mobileMenu?.querySelectorAll('a');
-        if (mobileLinks) {
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', closeMobileMenu);
-            });
-        }
+      const mRate = apr/12;
+      const monthly = mRate === 0 ? (principal/term) : (principal * (mRate*Math.pow(1+mRate, term)) / (Math.pow(1+mRate, term)-1));
+      const totalPay = monthly * term;
+      const totalInterest = Math.max(0, totalPay - principal);
 
-        // Close mobile menu on window resize
-        window.addEventListener('resize', () => {
-            if (window.innerWidth >= 768) {
-                closeMobileMenu();
-            }
-        });
+      document.getElementById('out-monthly').textContent  = `$${fmt(monthly || 0)}`;
+      document.getElementById('out-financed').textContent = `$${fmt(principal)}`;
+      document.getElementById('out-interest').textContent = `$${fmt(totalInterest)}`;
+      document.getElementById('out-total').textContent    = `$${fmt(totalPay)}`;
 
-        // Auto Loan Calculator
-        function calculateLoan() {
-            const vehiclePrice = parseFloat(document.getElementById('vehiclePrice').value) || 0;
-            const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
-            const interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
-            const loanTerm = parseInt(document.getElementById('loanTerm').value) || 0;
+      const first = new Date(); first.setMonth(first.getMonth()+1);
+      const last  = new Date(); last.setMonth(last.getMonth()+term);
+      document.getElementById('snap-first').textContent = first.toLocaleDateString();
+      document.getElementById('snap-last').textContent  = last.toLocaleDateString();
 
-            // Validation
-            if (vehiclePrice <= 0) {
-                alert('Please enter a valid vehicle price');
-                return;
-            }
-            if (downPayment >= vehiclePrice) {
-                alert('Down payment cannot be greater than or equal to vehicle price');
-                return;
-            }
-            if (loanTerm <= 0) {
-                alert('Please select a loan term');
-                return;
-            }
+      window.dataLayer = window.dataLayer || [];
+      dataLayer.push({ event:'finance_calculated', value:+(monthly||0).toFixed(2), principal:+principal.toFixed(2), apr:+(apr*100).toFixed(2), term });
+    }
 
-            const loanAmount = vehiclePrice - downPayment;
-            const monthlyRate = (interestRate / 100) / 12;
-            
-            let monthlyPayment;
-            let totalInterest;
-            
-            if (monthlyRate === 0) {
-                monthlyPayment = loanAmount / loanTerm;
-                totalInterest = 0;
-            } else {
-                monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, loanTerm)) / (Math.pow(1 + monthlyRate, loanTerm) - 1);
-                totalInterest = (monthlyPayment * loanTerm) - loanAmount;
-            }
+    document.getElementById('calc-form').addEventListener('submit', e => { e.preventDefault(); calc(); });
+    window.addEventListener('DOMContentLoaded', calc);
 
-            const totalCost = vehiclePrice + totalInterest;
-
-            // Display results
-            document.getElementById('monthlyPayment').textContent = '$' + monthlyPayment.toFixed(2);
-            document.getElementById('loanAmount').textContent = '$' + loanAmount.toLocaleString();
-            document.getElementById('totalInterest').textContent = '$' + totalInterest.toFixed(2);
-            document.getElementById('totalCost').textContent = '$' + totalCost.toLocaleString();
-
-            // Show results panel
-            document.getElementById('results').classList.remove('hidden');
-            
-            // Scroll to results
-            document.getElementById('results').scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'center' 
-            });
-        }
-
-        // Auto-calculate when inputs change
-        document.addEventListener('DOMContentLoaded', function() {
-            const inputs = ['vehiclePrice', 'downPayment', 'interestRate', 'loanTerm'];
-            inputs.forEach(id => {
-                const element = document.getElementById(id);
-                element.addEventListener('input', function() {
-                    // Only auto-calculate if all fields have values
-                    if (inputs.every(inputId => document.getElementById(inputId).value)) {
-                        calculateLoan();
-                    }
-                });
-            });
-        });
-    </script>
+    // Modal helpers (same names as homepage so header button works)
+    function openLeadForm(){ const m=document.getElementById('lead-modal'); if(m){ m.classList.remove('hidden'); document.body.style.overflow='hidden'; } if(window.fbq) fbq('track','Contact'); }
+    function closeLeadForm(){ const m=document.getElementById('lead-modal'); if(m){ m.classList.add('hidden'); document.body.style.overflow='auto'; } }
+  </script>
 </body>
 </html>
