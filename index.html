@@ -98,31 +98,34 @@
   
   <!-- Header/Navigation -->
   <header class="bg-luxury-black/90 backdrop-blur-md border-b border-luxury-gold/20 sticky top-0 z-50 font-work-sans">
-    <nav class="container mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-center md:justify-between">
-      <div class="flex items-center space-x-3 mb-4 md:mb-0">
-        <img src="logo.png" alt="Springers Vehicle Sourcing" class="h-24 w-auto">
+    <nav class="container mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-center md:justify-between text-center md:text-left gap-4">
+      <!-- Logo -->
+      <div class="flex justify-center md:justify-start">
+        <img src="logo.png" alt="Springers Vehicle Sourcing" class="h-20 md:h-24 w-auto">
       </div>
 
-      <div class="hidden md:flex items-center justify-center space-x-10 text-lg md:text-xl font-semibold">
-        <a href="#how-it-works" class="text-luxury-white hover:text-luxury-gold transition duration-300">
+      <!-- Navigation Links -->
+      <div class="flex flex-wrap justify-center items-center space-x-6 md:space-x-10">
+        <a href="#how-it-works" class="text-luxury-white hover:text-luxury-gold transition duration-300 flex items-center">
           <i class="fas fa-cogs mr-2"></i>How It Works
         </a>
-        <a href="calculator.html" class="text-luxury-white hover:text-luxury-gold transition duration-300">
+        <a href="calculator.html" class="text-luxury-white hover:text-luxury-gold transition duration-300 flex items-center">
           <i class="fas fa-calculator mr-2"></i>Finance Calculator
         </a>
-        <a href="#faq" class="text-luxury-white hover:text-luxury-gold transition duration-300">
+        <a href="#faq" class="text-luxury-white hover:text-luxury-gold transition duration-300 flex items-center">
           <i class="fas fa-question-circle mr-2"></i>FAQ
         </a>
-        <button onclick="openLeadForm()" class="gold-gradient text-luxury-black px-8 py-4 rounded-xl text-lg md:text-xl font-bold hover:opacity-90 transition duration-300">
-          <i class="fas fa-search mr-2"></i>Start Search
-        </button>
       </div>
 
-      <div class="md:hidden">
-        <button id="mobile-menu-btn" class="hamburger"><span></span><span></span><span></span></button>
+      <!-- CTA Button -->
+      <div class="flex justify-center md:justify-end mt-2 md:mt-0">
+        <button onclick="openLeadForm()" class="gold-gradient text-luxury-black px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition duration-300 flex items-center space-x-2">
+          <i class="fas fa-search"></i><span>Start Search</span>
+        </button>
       </div>
     </nav>
   </header>
+
 
   <!-- Mobile Menu Overlay -->
   <div id="mobile-overlay" class="mobile-overlay"></div>
@@ -641,6 +644,7 @@
   </script>
 </body>
 </html>
+
 
 
 
