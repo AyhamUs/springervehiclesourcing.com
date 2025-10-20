@@ -179,19 +179,25 @@
         </div>
 
         <!-- Lead Capture Form (keeps your same IDs & fields so JS still works) -->
-        <div class="bg-luxury-gray/80 backdrop-blur-lg p-4 md:p-8 rounded-2xl border border-luxury-gold/20">
-          <form id="hero-form" class="space-y-4 md:space-y-6">
+        <div class="bg-luxury-gray/80 backdrop-blur-lg p-4 md:p-8 rounded-2xl border border-luxury-gold/20 flex flex-col justify-between">
+          <form id="hero-form" class="flex flex-col h-full space-y-4 md:space-y-6 flex-grow">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input type="text" name="name" placeholder="Full Name" required class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
               <input type="email" name="email" placeholder="Email Address" required class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
             </div>
+
             <input type="tel" name="phone" placeholder="Phone Number" required class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
             <input type="text" name="vehicle" placeholder="Vehicle Wanted (Year/Make/Model)" class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
-            <button type="submit" class="w-full gold-gradient text-luxury-black py-3 md:py-4 rounded-lg text-lg md:text-xl font-bold hover:opacity-90 transition duration-300">
+
+            <!-- Spacer pushes button to bottom -->
+            <div class="flex-grow"></div>
+
+            <button type="submit" class="mt-auto w-full gold-gradient text-luxury-black py-3 md:py-4 rounded-lg text-lg md:text-xl font-bold hover:opacity-90 transition duration-300">
               SUBMIT
             </button>
           </form>
         </div>
+
       </div>
     </div>
   
@@ -641,6 +647,7 @@
   </script>
 </body>
 </html>
+
 
 
 
