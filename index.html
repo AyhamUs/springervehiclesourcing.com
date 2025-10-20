@@ -158,47 +158,43 @@
           We Locate, Verify and Deliver Work Ready Vehicles Nationwide
       </p>
       
-      <!-- Lead Capture Form -->
-      <div class="max-w-2xl mx-auto bg-luxury-gray/80 backdrop-blur-lg p-4 md:p-8 rounded-2xl border border-luxury-gold/20">
-        <form id="hero-form" class="space-y-4 md:space-y-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input type="text" name="name" placeholder="Full Name" required class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
-            <input type="email" name="email" placeholder="Email Address" required class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
-          </div>
-          <input type="tel" name="phone" placeholder="Phone Number" required class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
-          <input type="text" name="vehicle" placeholder="Vehicle Wanted (Year/Make/Model)" class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
-          <button type="submit" class="w-full gold-gradient text-luxury-black py-3 md:py-4 rounded-lg text-lg md:text-xl font-bold hover:opacity-90 transition duration-300">
-             SUBMIT
-          </button>
-          <p class="text-xs text-luxury-white/60 text-center">
+    <!-- Lead Capture + About (two-column) -->
+    <div class="max-w-6xl mx-auto">
+      <div class="grid gap-6 lg:gap-8 lg:grid-cols-2 items-stretch">
+        <!-- About / What We Do -->
+        <div class="bg-luxury-gray/80 backdrop-blur-lg p-6 md:p-8 rounded-2xl border border-luxury-gold/20 flex flex-col justify-center text-left">
+          <h2 class="text-2xl md:text-3xl font-extrabold text-gold mb-4" style="font-family:'Montserrat',sans-serif;">
+            What is Springer Vehicle Sourcing?
+          </h2>
+          <p class="text-luxury-white/90 text-base md:text-lg leading-relaxed mb-5">
+            We help contractors and trade businesses find <span class="text-gold font-semibold">work-ready trucks and vans</span> fast—without dealer markups or wasted time. 
+            Tell us what you need, and we do the searching, verifying, negotiating, and delivery.
           </p>
-        </form>
-      </div>
-    </div>
-  </section>
+          <ul class="space-y-3 text-luxury-white/85 text-sm md:text-base">
+            <li class="flex gap-3"><i class="fas fa-check text-gold mt-1"></i><span>Access to nationwide dealer-only networks and off-market inventory</span></li>
+            <li class="flex gap-3"><i class="fas fa-check text-gold mt-1"></i><span>No hidden fees—just a transparent flat finder’s fee</span></li>
+            <li class="flex gap-3"><i class="fas fa-check text-gold mt-1"></i><span>Vehicles verified for condition and readiness before you pay</span></li>
+            <li class="flex gap-3"><i class="fas fa-check text-gold mt-1"></i><span>Shipping arranged to your door, fully insured</span></li>
+          </ul>
+        </div>
 
-  <!-- How It Works -->
-  <section id="how-it-works" class="py-12 md:py-20 bg-luxury-gray">
-    <div class="container mx-auto px-4 md:px-6 mobile-padding">
-      <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-12 md:mb-16 text-luxury-white">How It Works</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto">
-        <div class="text-center">
-          <div class="bg-luxury-gold text-luxury-black w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center text-2xl md:text-3xl font-black mx-auto mb-6">1️⃣</div>
-          <h3 class="text-xl md:text-2xl font-bold mb-4 text-luxury-white">Send Your Request</h3>
-          <p class="text-luxury-white/80 leading-relaxed text-sm md:text-base">Send Your Request – Fill out the quick form with your name, contact info, and the type of vehicle you want.</p>
-        </div>
-        <div class="text-center">
-          <div class="bg-luxury-gold text-luxury-black w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center text-2xl md:text-3xl font-black mx-auto mb-6">2️⃣</div>
-          <h3 class="text-xl md:text-2xl font-bold mb-4 text-luxury-white">Talk With Our Team</h3>
-          <p class="text-luxury-white/80 leading-relaxed text-sm md:text-base">We’ll give you a quick call within 24-48 hours to confirm your specs, timing, and next steps.</p>
-        </div>
-        <div class="text-center">
-          <div class="bg-luxury-gold text-luxury-black w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center text-2xl md:text-3xl font-black mx-auto mb-6">3️⃣</div>
-          <h3 class="text-xl md:text-2xl font-bold mb-4 text-luxury-white">Review Your Options</h3>
-          <p class="text-luxury-white/80 leading-relaxed text-sm md:text-base">We’ll show you the best vehicles available that fit your needs and handle everything from paperwork to delivery.</p>
+        <!-- Lead Capture Form (keeps your same IDs & fields so JS still works) -->
+        <div class="bg-luxury-gray/80 backdrop-blur-lg p-4 md:p-8 rounded-2xl border border-luxury-gold/20">
+          <form id="hero-form" class="space-y-4 md:space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input type="text" name="name" placeholder="Full Name" required class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
+              <input type="email" name="email" placeholder="Email Address" required class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
+            </div>
+            <input type="tel" name="phone" placeholder="Phone Number" required class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
+            <input type="text" name="vehicle" placeholder="Vehicle Wanted (Year/Make/Model)" class="w-full px-4 py-3 md:py-4 bg-luxury-black/50 border border-luxury-gold/30 rounded-lg text-luxury-white placeholder-luxury-white/60 focus:border-luxury-gold focus:outline-none text-sm md:text-base">
+            <button type="submit" class="w-full gold-gradient text-luxury-black py-3 md:py-4 rounded-lg text-lg md:text-xl font-bold hover:opacity-90 transition duration-300">
+              SUBMIT
+            </button>
+          </form>
         </div>
       </div>
     </div>
+  
   </section>
 
     <!-- Why Choose Us -->
@@ -645,6 +641,7 @@
   </script>
 </body>
 </html>
+
 
 
 
