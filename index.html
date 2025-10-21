@@ -98,34 +98,34 @@
   
   <!-- Header/Navigation -->
   <header class="bg-luxury-black/90 backdrop-blur-md border-b border-luxury-gold/20 sticky top-0 z-50 font-work-sans">
-    <nav class="container mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-center md:justify-between text-center md:text-left gap-4">
+    <nav class="container mx-auto px-8 md:px-12 py-5 flex items-center justify-between">
     
-      <!-- Logo -->
-      <div class="flex justify-center md:justify-start">
-        <img src="logo.png" alt="Springers Vehicle Sourcing" class="h-20 md:h-24 w-auto">
+      <!-- Left: Logo -->
+      <div class="flex items-center gap-4 md:gap-6">
+        <img src="logo.png" alt="Springer Vehicle Sourcing Logo" class="h-10 md:h-12 object-contain">
+        <span class="text-luxury-white font-semibold text-lg md:text-xl tracking-wide">Springer Vehicle Sourcing</span>
       </div>
 
-      <!-- Navigation Links -->
-      <div class="flex flex-wrap justify-center items-center space-x-6 md:space-x-10 text-lg md:text-xl font-semibold">
-        <a href="#how-it-works" class="text-luxury-white hover:text-luxury-gold transition duration-300 flex items-center">
-          <i class="fas fa-cogs mr-2 text-gold"></i>How It Works
-        </a>
-        <a href="calculator.html" class="text-luxury-white hover:text-luxury-gold transition duration-300 flex items-center">
-          <i class="fas fa-calculator mr-2 text-gold"></i>Finance Calculator
-        </a>
-        <a href="#faq" class="text-luxury-white hover:text-luxury-gold transition duration-300 flex items-center">
-          <i class="fas fa-question-circle mr-2 text-gold"></i>FAQ
-        </a>
-      </div>
+      <!-- Center: Navigation Links -->
+      <ul class="hidden md:flex items-center gap-8 lg:gap-10 text-luxury-white text-sm md:text-base font-medium">
+        <li><a href="#about" class="hover:text-luxury-gold transition duration-300">About</a></li>
+        <li><a href="#services" class="hover:text-luxury-gold transition duration-300">Services</a></li>
+        <li><a href="#how-it-works" class="hover:text-luxury-gold transition duration-300">How It Works</a></li>
+        <li><a href="#contact" class="hover:text-luxury-gold transition duration-300">Contact</a></li>
+      </ul>
 
-      <!-- CTA Button -->
-      <div class="flex justify-center md:justify-end mt-2 md:mt-0">
-        <button onclick="openLeadForm()" class="gold-gradient text-luxury-black px-8 py-3 rounded-lg text-lg md:text-xl font-bold hover:opacity-90 transition duration-300 flex items-center space-x-2 shadow-md hover:shadow-lg">
-          <i class="fas fa-search"></i><span>Start Search</span>
+      <!-- Right: Call-to-Action / Button -->
+      <div class="flex items-center gap-4">
+        <a href="#lead-form" class="bg-luxury-gold text-luxury-black px-5 py-2 rounded-lg font-semibold hover:opacity-90 transition duration-300">
+          Get Started
+        </a>
+        <button id="mobile-menu-btn" class="md:hidden text-luxury-white text-2xl focus:outline-none">
+          <i class="fas fa-bars"></i>
         </button>
       </div>
     </nav>
   </header>
+
 
 
   <!-- Mobile Menu Overlay -->
@@ -644,6 +644,7 @@
   </script>
 </body>
 </html>
+
 
 
 
