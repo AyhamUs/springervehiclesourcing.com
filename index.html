@@ -97,30 +97,71 @@
   <!-- End Google Tag Manager (noscript) -->
   
   <!-- Header/Navigation -->
-  <header class="bg-luxury-black/90 backdrop-blur-md border-b border-luxury-gold/20 sticky top-0 z-50 font-work-sans">
-    <nav class="container mx-auto px-6 py-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-3">
-          <img src="logo.png" alt="Springer Vehicle Sourcing Logo" class="h-10">
-          <span class="text-lg font-semibold text-luxury-white">Springer Vehicle Sourcing</span>
-        </div>
-        <ul class="hidden md:flex space-x-8 text-luxury-white font-medium">
-          <li><a href="#about" class="hover:text-luxury-gold transition duration-300">About</a></li>
-          <li><a href="#services" class="hover:text-luxury-gold transition duration-300">Services</a></li>
-          <li><a href="#how-it-works" class="hover:text-luxury-gold transition duration-300">How It Works</a></li>
-          <li><a href="#contact" class="hover:text-luxury-gold transition duration-300">Contact</a></li>
+  <!-- Header -->
+  <header class="bg-luxury-black/90 backdrop-blur-md border-b border-luxury-gold/20 sticky top-0 z-50">
+    <nav class="container mx-auto px-6 md:px-8 lg:px-12 py-4">
+      <div class="flex items-center justify-between gap-6">
+        <!-- Left: Logo -->
+        <a href="#top" class="shrink-0 inline-flex items-center">
+          <img src="logo.png" alt="Springers Vehicle Sourcing" class="h-12 w-auto">
+        </a>
+
+        <!-- Center: Nav (desktop) -->
+        <ul class="hidden md:flex items-center gap-10 text-luxury-white/90 text-base">
+          <li>
+            <a href="#how-it-works" class="inline-flex items-center gap-2 hover:text-luxury-gold transition">
+              <i class="fas fa-cogs text-luxury-white/90"></i>
+              <span>How It Works</span>
+            </a>
+          </li>
+          <li>
+            <a href="#calculator" class="inline-flex items-center gap-2 hover:text-luxury-gold transition">
+              <i class="fas fa-calculator text-luxury-white/90"></i>
+              <span>Finance Calculator</span>
+            </a>
+          </li>
+          <li>
+            <a href="#faq" class="inline-flex items-center gap-2 hover:text-luxury-gold transition">
+              <i class="fas fa-question-circle text-luxury-white/90"></i>
+              <span>FAQ</span>
+            </a>
+          </li>
         </ul>
-        <div class="flex items-center space-x-4">
-          <a href="#lead-form" class="bg-luxury-gold text-luxury-black px-5 py-2 rounded-lg font-semibold hover:opacity-90 transition duration-300">
-            Get Started
+
+        <!-- Right: CTA + Mobile Menu Button -->
+        <div class="flex items-center gap-4">
+          <a href="#lead-form" class="hidden md:inline-flex items-center gap-2 gold-gradient text-luxury-black font-semibold px-5 py-2.5 rounded-lg hover:opacity-90 transition shadow">
+            <i class="fas fa-search"></i>
+            <span>Book Consultation</span>
           </a>
-          <button id="mobile-menu-btn" class="md:hidden text-luxury-white text-2xl focus:outline-none">
+
+          <!-- Mobile menu toggle -->
+          <button id="mobile-menu-btn" class="md:hidden text-luxury-white text-2xl" aria-label="Open menu">
             <i class="fas fa-bars"></i>
           </button>
         </div>
       </div>
     </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden hidden border-t border-luxury-gold/20">
+      <ul class="px-6 py-4 space-y-4 text-luxury-white/90">
+        <li><a href="#how-it-works" class="flex items-center gap-2 hover:text-luxury-gold transition"><i class="fas fa-cogs"></i> <span>How It Works</span></a></li>
+        <li><a href="#calculator" class="flex items-center gap-2 hover:text-luxury-gold transition"><i class="fas fa-calculator"></i> <span>Finance Calculator</span></a></li>
+        <li><a href="#faq" class="flex items-center gap-2 hover:text-luxury-gold transition"><i class="fas fa-question-circle"></i> <span>FAQ</span></a></li>
+        <li><a href="#lead-form" class="mt-2 inline-flex items-center gap-2 gold-gradient text-luxury-black font-semibold px-5 py-2.5 rounded-lg hover:opacity-90 transition shadow"><i class="fas fa-search"></i> <span>Book Consultation</span></a></li>
+      </ul>
+    </div>
   </header>
+
+  <script>
+    // Simple mobile menu toggle
+    const mbBtn = document.getElementById('mobile-menu-btn');
+    const mbMenu = document.getElementById('mobile-menu');
+    mbBtn?.addEventListener('click', () => {
+      mbMenu.classList.toggle('hidden');
+    });
+  </script>
 
 
 
@@ -640,6 +681,7 @@
   </script>
 </body>
 </html>
+
 
 
 
